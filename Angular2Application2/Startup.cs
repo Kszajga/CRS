@@ -8,6 +8,10 @@ using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Angular2Application2.Data;
+using Microsoft.EntityFrameworkCore;
+using System.ComponentModel;
 
 namespace Angular2Application2
 {
@@ -30,6 +34,13 @@ namespace Angular2Application2
         {
             // Add framework services.
             services.AddMvc();
+
+            // Add SQL services
+            services.AddEntityFramework()
+                .AddDbContext<CRSContext>(config =>
+                {
+                    config.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]);
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

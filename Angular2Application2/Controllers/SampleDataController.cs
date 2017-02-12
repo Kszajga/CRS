@@ -3,16 +3,48 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Angular2Application2.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Angular2Application2.Controllers
 {
     [Route("api/[controller]")]
     public class SampleDataController : Controller
     {
+
+        private CRSContext _context;
+
+        public SampleDataController([FromServices] Data.CRSContext context)
+        {
+            _context = context;
+        }
+
+        [HttpGet("[action]")]
+        [Route("")]
+        [ProducesResponseType(typeof(IEnumerable<User>), 200)]
+        public async Task<IActionResult> GetAll()
+        {
+            var data = await _context.User
+                .OrderBy(p => p.Name)
+                .ToListAsync();
+            return Ok(data);
+        }
+
         private static string[] Summaries = new[]
         {
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
+
+        [HttpGet("[action]")]
+        [Route("")]
+        [ProducesResponseType(typeof(IEnumerable<User>), 200)]
+        public async Task<IActionResult> GetAllCustomer()
+        {
+            var data = await _context.Customer
+                .OrderBy(p => p.FirstName)
+                .ToListAsync();
+            return Ok(data);
+        }
 
         [HttpGet("[action]")]
         public IEnumerable<WeatherForecast> WeatherForecasts()
