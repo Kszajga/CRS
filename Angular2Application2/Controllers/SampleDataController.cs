@@ -19,32 +19,23 @@ namespace Angular2Application2.Controllers
             _context = context;
         }
 
-        [HttpGet("[action]")]
-        [Route("")]
-        [ProducesResponseType(typeof(IEnumerable<User>), 200)]
-        public async Task<IActionResult> GetAll()
-        {
-            var data = await _context.User
-                .OrderBy(p => p.Name)
-                .ToListAsync();
-            return Ok(data);
-        }
+        
+
+        //[HttpGet("[action]")]
+        //[Route("")]
+        //[ProducesResponseType(typeof(IEnumerable<User>), 200)]
+        //public async Task<IActionResult> GetAll()
+        //{
+        //    var data = await _context.User
+        //        .OrderBy(p => p.Name)
+        //        .ToListAsync();
+        //    return Ok(data);
+        //}
 
         private static string[] Summaries = new[]
         {
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
-
-        [HttpGet("[action]")]
-        [Route("")]
-        [ProducesResponseType(typeof(IEnumerable<User>), 200)]
-        public async Task<IActionResult> GetAllCustomer()
-        {
-            var data = await _context.Customer
-                .OrderBy(p => p.FirstName)
-                .ToListAsync();
-            return Ok(data);
-        }
 
         [HttpGet("[action]")]
         public IEnumerable<WeatherForecast> WeatherForecasts()
