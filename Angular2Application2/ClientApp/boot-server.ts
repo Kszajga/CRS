@@ -7,6 +7,8 @@ import { AppModule } from './app/app.module';
 enableProdMode();
 const platform = platformNodeDynamic();
 
+
+
 export default function (params: any) : Promise<{ html: string, globals?: any }> {
     return new Promise((resolve, reject) => {
         const requestZone = Zone.current.fork({

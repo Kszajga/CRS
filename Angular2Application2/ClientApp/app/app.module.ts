@@ -7,13 +7,19 @@ import { HomeComponent } from './components/home/home.component';
 import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
 import { CounterComponent } from './components/counter/counter.component';
 
+import { CarListComponent } from './components/car/carList.component';
+import { CarListItemComponent } from './components/car/carListItem.component';
+import { CarService } from './components/car/carService';
+
 @NgModule({
-    bootstrap: [ AppComponent ],
+    bootstrap: [AppComponent],
     declarations: [
         AppComponent,
         NavMenuComponent,
         CounterComponent,
         FetchDataComponent,
+        CarListComponent,
+        CarListItemComponent,
         HomeComponent
     ],
     imports: [
@@ -23,9 +29,13 @@ import { CounterComponent } from './components/counter/counter.component';
             { path: 'home', component: HomeComponent },
             { path: 'counter', component: CounterComponent },
             { path: 'fetch-data', component: FetchDataComponent },
-            { path: '**', redirectTo: 'home' }
+            { path: 'car', component: CarListComponent },
+            { path: 'car/:customerID', component: CarListItemComponent },
+            { path: '**', redirectTo: 'home' }            
         ])
-    ]
+    ],
+    providers: [CarService]
 })
+
 export class AppModule {
 }

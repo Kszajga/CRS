@@ -1,0 +1,26 @@
+﻿<h1>Cars</h1>
+<p>This component demonstrates fetching data from the server.</p>
+<p *ngIf="!cars"><em>Loading...</em></p>
+<table class='table' *ngIf="cars">
+    {{ customerID }}
+    <thead>
+        <tr>
+            <th>VIN</th>
+            <th>CarMake</th>
+            <th>CarModel</th>
+            <th>ServiceIncidences</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let car of cars">
+            <td>{{ car.vin }}</td>
+            <td>{{ car.carMake.carMakeName }}</td>
+            <td>{{ car.carModel.carModelName }}</td>
+            <td>
+                <ul>
+                    <li *ngFor="let si of car.serviceIncidences">{{ si.serviceIncidenceName.incidenceName }} {{ si.repairDate | date:'yyyy. MM. dd.'}}</li>
+                </ul>
+            </td>
+        </tr>
+    </tbody>
+</table>

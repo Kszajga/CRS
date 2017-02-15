@@ -33,7 +33,10 @@ namespace Angular2Application2
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-            services.AddMvc();
+            services.AddMvc()
+                .AddJsonOptions(
+                    options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                ); ;
 
             // Add SQL services
             services.AddEntityFramework()

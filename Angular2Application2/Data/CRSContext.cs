@@ -60,7 +60,7 @@ namespace Angular2Application2.Data
             var carMakeTableModel = modelBuilder.Entity<CarMake>();
             carMakeTableModel.HasKey(p => p.CarMakeID);
             carMakeTableModel.Property(p => p.CarMakeID).UseSqlServerIdentityColumn();
-            carMakeTableModel.HasMany(s => s.Cars);
+            //carMakeTableModel.HasMany(s => s.Cars);
 
             var carModelTableModel = modelBuilder.Entity<CarModel>();
             carModelTableModel.HasKey(p => p.CarModelID);

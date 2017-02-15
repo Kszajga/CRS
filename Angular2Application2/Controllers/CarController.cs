@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -27,9 +26,26 @@ namespace Angular2Application2.Controllers
         {
             var data = await _context.Car
                 .Where(c => c.CustomerID == customerID)
-                .Include(si => si.ServiceIncidences)
-                .Include(si => si.FuelType)
-                //.Include(customer => customer.Customer)
+                .Include(e => e.CarMake)
+                .Include(e => e.CarModel)
+                .Include(e => e.FuelType)
+                .Include(e => e.ServiceIncidences)
+                    .ThenInclude(c => c.ServiceIncidenceName)
+                .ToListAsync();
+            return Ok(data);
+        }
+
+        [HttpGet("[action]")]
+        [Route("")]
+        [ProducesResponseType(typeof(IEnumerable<Car>), 200)]
+        public async Task<IActionResult> GetCars()
+        {
+            var data = await _context.Car
+                .Include(e => e.CarMake)
+                .Include(e => e.CarModel)
+                .Include(e => e.FuelType)
+                .Include(e => e.ServiceIncidences)
+                    .ThenInclude(c => c.ServiceIncidenceName)
                 .ToListAsync();
             return Ok(data);
         }

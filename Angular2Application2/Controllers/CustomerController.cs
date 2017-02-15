@@ -28,8 +28,14 @@ namespace Angular2Application2.Controllers
             var data = await _context.Customer
                 .Where(c => c.CustomerID == customerID)
                 .Include(car => car.Cars)
-                    .ThenInclude(car => car.Select(sajt =>sajt.FuelTypeID))
-                //.Include(sajt => sajt.Cars.Select(c=>c.FuelType))
+                    .ThenInclude(car => car.FuelType)
+                .Include(car => car.Cars)
+                    .ThenInclude(car2 => car2.CarMake)
+                .Include(car => car.Cars)
+                    .ThenInclude(car3 => car3.CarModel)
+                .Include(car => car.Cars)
+                    .ThenInclude(car4 => car4.ServiceIncidences)
+                        .ThenInclude(s => s.ServiceIncidenceName)
                 .ToListAsync();
             return Ok(data);
         }
@@ -41,12 +47,14 @@ namespace Angular2Application2.Controllers
         {
             var data = await _context.Customer
                 .Include(car => car.Cars)
-                .ThenInclude(car => car.FuelType)
+                    .ThenInclude(car => car.FuelType)
                 .Include(car => car.Cars)
-                .ThenInclude(car2 => car2.CarMake)
+                    .ThenInclude(car2 => car2.CarMake)
                 .Include(car => car.Cars)
-                .ThenInclude(car3 => car3.CarModel)
-                
+                    .ThenInclude(car3 => car3.CarModel)
+                .Include(car => car.Cars)
+                    .ThenInclude(car4 => car4.ServiceIncidences)
+                        .ThenInclude(s => s.ServiceIncidenceName)
                 .ToListAsync();
             return Ok(data);
         }
