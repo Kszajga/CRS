@@ -49,5 +49,19 @@ namespace Angular2Application2.Controllers
                 .ToListAsync();
             return Ok(data);
         }
+
+        [HttpPost]
+        [Route("")]
+        [ProducesResponseType(typeof(Car), 200)]
+        public async Task<IActionResult> AddNewCar([FromBody] Car car)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Entry(car).State = EntityState.Added;
+                await _context.SaveChangesAsync();
+                return Created("", car);
+            }
+            return BadRequest(ModelState);
+        }
     }
 }

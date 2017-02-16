@@ -9,7 +9,9 @@ import { CounterComponent } from './components/counter/counter.component';
 
 import { CarListComponent } from './components/car/carList.component';
 import { CarListItemComponent } from './components/car/carListItem.component';
+import { CarNewItemComponent } from "./components/car/carNewItem.component";
 import { CarService } from './components/car/carService';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
     bootstrap: [AppComponent],
@@ -20,10 +22,12 @@ import { CarService } from './components/car/carService';
         FetchDataComponent,
         CarListComponent,
         CarListItemComponent,
+        CarNewItemComponent,
         HomeComponent
     ],
     imports: [
         UniversalModule, // Must be first import. This automatically imports BrowserModule, HttpModule, and JsonpModule too.
+        ReactiveFormsModule, 
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
@@ -31,6 +35,7 @@ import { CarService } from './components/car/carService';
             { path: 'fetch-data', component: FetchDataComponent },
             { path: 'car', component: CarListComponent },
             { path: 'car/:customerID', component: CarListItemComponent },
+            { path: 'newcar', component: CarNewItemComponent },
             { path: '**', redirectTo: 'home' }            
         ])
     ],

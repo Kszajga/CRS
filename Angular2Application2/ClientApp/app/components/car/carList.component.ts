@@ -11,10 +11,12 @@ import ICar = App.Models.ICar;
 })
 export class CarListComponent implements OnInit {
     public cars: ICar[];
-    public customerID;
+
     
-    constructor(private carService: CarService, private route: ActivatedRoute) {
-        console.log(this.customerID);
+    constructor(
+        private carService: CarService,
+        private route: ActivatedRoute
+    ) {
         this.carService.cars.subscribe(this.processData);
     }
 
@@ -23,15 +25,8 @@ export class CarListComponent implements OnInit {
     }
 
     ngOnInit() {
-        //let id = this.route.snapshot.params['customerID'];
-        //this.customerID = id;
-        //console.log("ngOnInit " + this.customerID);
         this.carService.getAllCar();
-    }
-
-    
-
-        
+    }        
 }
 
 interface Car {
