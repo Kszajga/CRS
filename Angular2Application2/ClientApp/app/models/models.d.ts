@@ -1,8 +1,15 @@
 ﻿declare module App.Models {
 
     interface ICar {
-        carID: number;
-        name: string;
+        CarMakeID: number;
+        CarModelID: number;
+        CarModelID1: number;
+        Color: string;
+        CustomerID: number;
+        EngineNumber: string;
+        FuelTypeID: number;
+        FuelTypeID1: number;
+        VIN: string;
     }
 
     interface IUser {

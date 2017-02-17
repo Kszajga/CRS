@@ -1,7 +1,8 @@
 ﻿import { Component, OnInit } from "@angular/core";
 import { Params, Router, ActivatedRoute } from "@angular/router";
+import { Subscription } from "rxjs/Subscription";
 import { CarService } from "./carService";
-import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from "@angular/forms";
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 
 import ICar = App.Models.ICar;
 
@@ -16,6 +17,8 @@ export class CarNewItemComponent implements OnInit {
 
     private state: ICar = null;
 
+    private subscription: Subscription;
+
     constructor(
         private router: Router,
         private carService: CarService,
@@ -27,10 +30,25 @@ export class CarNewItemComponent implements OnInit {
         this.car = data; // ez egyáltalán minek?
     }
 
-    ngOnInit(): void { }
+    ngOnInit(): void {
+        this.subscription =
+            this.carService.car.subscribe(this.processData);
+
+        this.carForm = this.formBuilder.group({
+            "carMakeID": [null, Validators.compose([Validators.required])],
+            "carModelID": [null, Validators.compose([Validators.required])],
+            "FuelTypeID": [null, Validators.compose([Validators.required])],
+            "VIN": [null, Validators.compose([Validators.required])],
+            "engineNumber": [null, Validators.compose([Validators.required])],
+            "color": [null, Validators.compose([Validators.required])],
+            "customerID": [null, Validators.compose([Validators.required])]
+
+        });
+    }
 
     saveCar() {
         this.car = this.carForm.value;
-        this.carService.addNewCar(this.car);
+        console.log(this.car);
+        this.carService.insert(this.car);
     }
 }

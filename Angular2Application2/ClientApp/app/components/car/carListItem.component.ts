@@ -10,17 +10,17 @@ import ICar = App.Models.ICar;
     template: require('./carListItem.component.html')
 })
 export class CarListItemComponent implements OnInit {
-    public car: ICar;
+    public car: ICar[];
     public customerID;
     
     constructor(
         private carService: CarService,
         private route: ActivatedRoute
     ) {
-        this.carService.car.subscribe(this.processData);
+        this.carService.cars.subscribe(this.processData);
     }
 
-    processData = (data: ICar) => {
+    processData = (data: ICar[]) => {
         this.car = data;
     }
 

@@ -56,13 +56,14 @@ export class CarService {
     getCarByCustomerID(customerID: number): void {
         this.http.get("/api/Car/GetCarsByCustomerID?customerID=" + customerID).subscribe(
             (result: Response) => {
-                this.car.next(result.json());
+                this.cars.next(result.json());
                 //console.log("car " + result.json()[0].carModel.carModelName);
             }, this.handleError);
     }
 
-    addNewCar(car: Car): void {
-        this.http.post("api/Car/AddNewCar/",
+    insert(car: Car): void {
+        console.log("serviceből: " + car);
+        this.http.post("/api/Car",
             JSON.stringify(car),
             this.defaultArgs)
             .subscribe((result: Response) => {

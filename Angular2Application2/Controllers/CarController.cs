@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Angular2Application2.Data;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -53,13 +54,23 @@ namespace Angular2Application2.Controllers
         [HttpPost]
         [Route("")]
         [ProducesResponseType(typeof(Car), 200)]
-        public async Task<IActionResult> AddNewCar([FromBody] Car car)
+        public async Task<IActionResult> Insert([FromBody] Car car)
         {
+            Console.Write(car);
             if (ModelState.IsValid)
             {
-                _context.Entry(car).State = EntityState.Added;
-                await _context.SaveChangesAsync();
-                return Created("", car);
+                try
+                {
+                    _context.Entry(car).State = EntityState.Added;
+                    await _context.SaveChangesAsync();
+                    return Created("", car);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    throw;
+                }
+                
             }
             return BadRequest(ModelState);
         }
