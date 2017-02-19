@@ -1,5 +1,8 @@
 ﻿
 <h3>Új</h3>
+<select>
+    <option *ngFor="let carMake of carMakes" value="{{carMake.carMakeID}}">{{carMake.carMakeName}} {{carMake.carMakeID}}</option>
+</select>
 <form [formGroup]="carForm" novalidate>
     <div class="form-group">
         <label for="carMakeID">Jármű márka</label>

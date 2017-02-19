@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Angular2Application2.Data;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel;
+using static Microsoft.AspNetCore.Hosting.Internal.HostingApplication;
 
 namespace Angular2Application2
 {
@@ -44,6 +45,8 @@ namespace Angular2Application2
                 {
                     config.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]);
                 });
+
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -76,6 +79,9 @@ namespace Angular2Application2
                     name: "spa-fallback",
                     defaults: new { controller = "Home", action = "Index" });
             });
+
+            //DbContextSeedData.Seed(app);
+            DbInitializer.Initialize(app.ApplicationServices.GetRequiredService<CRSContext>());
         }
     }
 }

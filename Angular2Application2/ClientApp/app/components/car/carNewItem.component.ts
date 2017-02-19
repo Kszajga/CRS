@@ -5,6 +5,7 @@ import { CarService } from "./carService";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 
 import ICar = App.Models.ICar;
+import ICarMake = App.Models.ICarMake;
 
 @Component({
     selector: 'carNewItem',
@@ -13,10 +14,12 @@ import ICar = App.Models.ICar;
 
 export class CarNewItemComponent implements OnInit {
     car: ICar = null;
+    carMakes: ICarMake[];
     carForm: FormGroup;
 
-    private state: ICar = null;
 
+    private state: ICar = null;
+    
     private subscription: Subscription;
 
     constructor(
@@ -24,16 +27,19 @@ export class CarNewItemComponent implements OnInit {
         private carService: CarService,
         private route: ActivatedRoute,
         private formBuilder: FormBuilder
-    ){}
+    ){
+        this.carService.carMakes.subscribe(this.processData);
+    }
 
-    private processData = (data: ICar) => {
-        this.car = data; // ez egyáltalán minek?
+    private processData = (data: ICarMake[]) => {
+        this.carMakes = data; // ez egyáltalán minek?        
     }
 
     ngOnInit(): void {
-        this.subscription =
-            this.carService.car.subscribe(this.processData);
-
+        this.carService.getAllCarMakes();
+        
+        console.log("carmakes " + this.carMakes);
+        console.log("car " + this.car);
         this.carForm = this.formBuilder.group({
             "carMakeID": [null, Validators.compose([Validators.required])],
             "carModelID": [null, Validators.compose([Validators.required])],

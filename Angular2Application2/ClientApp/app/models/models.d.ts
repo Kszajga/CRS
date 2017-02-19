@@ -12,6 +12,11 @@
         VIN: string;
     }
 
+    interface ICarMake {
+        CarMakeID: number;
+        CarMakeName: string;
+    }
+
     interface IUser {
         userID: number;
         userName: string;

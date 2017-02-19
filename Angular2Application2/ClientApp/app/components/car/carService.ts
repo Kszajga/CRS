@@ -4,6 +4,7 @@ import { Subject } from "rxjs/Subject";
 import { Http, Response, RequestOptionsArgs, Headers } from "@angular/http";
 
 import Car = App.Models.ICar;
+import CarMake = App.Models.ICarMake;
 
 @Injectable()
 export class CarService {
@@ -11,11 +12,16 @@ export class CarService {
     cars: Subject<Car[]>;
     car: Subject<Car>;
 
+    /* FORMHOZ */
+    carMakes: Subject<CarMake[]>;
+    /* FORMHOZ VÉGE*/
+
     private defaultArgs: RequestOptionsArgs;
     //private configuration: Configuration, 
     constructor(private http: Http) {
         this.cars = new Subject<Car[]>();
         this.car = new Subject<Car>();
+        this.carMakes = new Subject<CarMake[]>();
 
         let defaultHeaders: Headers = new Headers();
         defaultHeaders.append("Content-Type", "application/json")
@@ -70,4 +76,14 @@ export class CarService {
                 this.car.next(result.json());
             }, this.handleError);
     }
+
+    /* FORMHOZ */
+    getAllCarMakes(): void {
+        this.http.get("/api/Car/GetAllCarMakes").subscribe(
+            (result: Response) => {
+                this.carMakes.next(result.json());
+                console.log("carMakes " + result.json()[0].carMakeName);
+            }, this.handleError);
+    }
+    /* FORMHOZ VÉGE */
 }

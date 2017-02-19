@@ -51,6 +51,16 @@ namespace Angular2Application2.Controllers
             return Ok(data);
         }
 
+        [HttpGet("[action]")]
+        [Route("")]
+        [ProducesResponseType(typeof(IEnumerable<Car>), 200)]
+        public async Task<IActionResult> GetAllCarMakes()
+        {
+            var data = await _context.CarMake
+                .ToListAsync();
+            return Ok(data);
+        }
+
         [HttpPost]
         [Route("")]
         [ProducesResponseType(typeof(Car), 200)]
