@@ -23,19 +23,6 @@ namespace Angular2Application2.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CarModel",
-                columns: table => new
-                {
-                    CarModelID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    CarModelName = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CarModel", x => x.CarModelID);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Customer",
                 columns: table => new
                 {
@@ -83,13 +70,31 @@ namespace Angular2Application2.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "CarModel",
+                columns: table => new
+                {
+                    CarModelID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    CarMakeID = table.Column<int>(nullable: false),
+                    CarModelName = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CarModel", x => x.CarModelID);
+                    table.ForeignKey(
+                        name: "FK_CarModel_CarMake_CarMakeID",
+                        column: x => x.CarMakeID,
+                        principalTable: "CarMake",
+                        principalColumn: "CarMakeID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Car",
                 columns: table => new
                 {
                     CarID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    CarMakeID = table.Column<int>(nullable: false),
-                    CarMakeID1 = table.Column<int>(nullable: true),
                     CarModelID = table.Column<int>(nullable: false),
                     CarModelID1 = table.Column<int>(nullable: true),
                     Color = table.Column<string>(nullable: true),
@@ -102,18 +107,6 @@ namespace Angular2Application2.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Car", x => x.CarID);
-                    table.ForeignKey(
-                        name: "FK_Car_CarMake_CarMakeID",
-                        column: x => x.CarMakeID,
-                        principalTable: "CarMake",
-                        principalColumn: "CarMakeID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Car_CarMake_CarMakeID1",
-                        column: x => x.CarMakeID1,
-                        principalTable: "CarMake",
-                        principalColumn: "CarMakeID",
-                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Car_CarModel_CarModelID",
                         column: x => x.CarModelID,
@@ -174,16 +167,6 @@ namespace Angular2Application2.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Car_CarMakeID",
-                table: "Car",
-                column: "CarMakeID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Car_CarMakeID1",
-                table: "Car",
-                column: "CarMakeID1");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Car_CarModelID",
                 table: "Car",
                 column: "CarModelID");
@@ -209,6 +192,11 @@ namespace Angular2Application2.Migrations
                 column: "FuelTypeID1");
 
             migrationBuilder.CreateIndex(
+                name: "IX_CarModel_CarMakeID",
+                table: "CarModel",
+                column: "CarMakeID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ServiceIncidence_CarID",
                 table: "ServiceIncidence",
                 column: "CarID");
@@ -231,9 +219,6 @@ namespace Angular2Application2.Migrations
                 name: "ServiceIncidenceName");
 
             migrationBuilder.DropTable(
-                name: "CarMake");
-
-            migrationBuilder.DropTable(
                 name: "CarModel");
 
             migrationBuilder.DropTable(
@@ -241,6 +226,9 @@ namespace Angular2Application2.Migrations
 
             migrationBuilder.DropTable(
                 name: "FuelType");
+
+            migrationBuilder.DropTable(
+                name: "CarMake");
         }
     }
 }

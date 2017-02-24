@@ -22,8 +22,6 @@ namespace Angular2Application2.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CarMakeID");
-
                     b.Property<int>("CarModelID");
 
                     b.Property<int?>("CarModelID1");
@@ -42,8 +40,6 @@ namespace Angular2Application2.Migrations
                         .IsRequired();
 
                     b.HasKey("CarID");
-
-                    b.HasIndex("CarMakeID");
 
                     b.HasIndex("CarModelID");
 
@@ -77,9 +73,13 @@ namespace Angular2Application2.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("CarMakeID");
+
                     b.Property<string>("CarModelName");
 
                     b.HasKey("CarModelID");
+
+                    b.HasIndex("CarMakeID");
 
                     b.ToTable("CarModel");
                 });
@@ -163,11 +163,6 @@ namespace Angular2Application2.Migrations
 
             modelBuilder.Entity("Angular2Application2.Data.Car", b =>
                 {
-                    b.HasOne("Angular2Application2.Data.CarMake", "CarMake")
-                        .WithMany("Cars")
-                        .HasForeignKey("CarMakeID")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.HasOne("Angular2Application2.Data.CarModel", "CarModel")
                         .WithMany()
                         .HasForeignKey("CarModelID")
@@ -190,6 +185,14 @@ namespace Angular2Application2.Migrations
                     b.HasOne("Angular2Application2.Data.FuelType")
                         .WithMany("Cars")
                         .HasForeignKey("FuelTypeID1");
+                });
+
+            modelBuilder.Entity("Angular2Application2.Data.CarModel", b =>
+                {
+                    b.HasOne("Angular2Application2.Data.CarMake", "CarMake")
+                        .WithMany("CarModel")
+                        .HasForeignKey("CarMakeID")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Angular2Application2.Data.ServiceIncidence", b =>

@@ -17,6 +17,11 @@
         CarMakeName: string;
     }
 
+    interface ICarModel {
+        CarModelID: number;
+        CarModelName: string;
+    }
+
     interface IUser {
         userID: number;
         userName: string;

@@ -6,6 +6,7 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 
 import ICar = App.Models.ICar;
 import ICarMake = App.Models.ICarMake;
+import ICarModel = App.Models.ICarModel;
 
 @Component({
     selector: 'carNewItem',
@@ -15,6 +16,7 @@ import ICarMake = App.Models.ICarMake;
 export class CarNewItemComponent implements OnInit {
     car: ICar = null;
     carMakes: ICarMake[];
+    carModels: ICarModel[];
     carForm: FormGroup;
 
 
@@ -29,17 +31,23 @@ export class CarNewItemComponent implements OnInit {
         private formBuilder: FormBuilder
     ){
         this.carService.carMakes.subscribe(this.processData);
+
+        this.carService.carModels.subscribe(this.carmodelData);
     }
 
     private processData = (data: ICarMake[]) => {
-        this.carMakes = data; // ez egyáltalán minek?        
+        this.carMakes = data;
+    }
+
+    private carmodelData = (data: ICarModel[]) => {
+        this.carModels = data;
     }
 
     ngOnInit(): void {
         this.carService.getAllCarMakes();
         
-        console.log("carmakes " + this.carMakes);
-        console.log("car " + this.car);
+        console.log("carmakes from component " + this.carMakes);
+        console.log("car from component " + this.car);
         this.carForm = this.formBuilder.group({
             "carMakeID": [null, Validators.compose([Validators.required])],
             "carModelID": [null, Validators.compose([Validators.required])],
@@ -52,9 +60,20 @@ export class CarNewItemComponent implements OnInit {
         });
     }
 
+    SelectedCarMake(carmakeid: number) {
+        this.carModels = null;
+        this.carService.getCarModelByCarMakeID(carmakeid);
+    }
+
+    SelectedCarModel(carmodelid: number) {
+        console.log(carmodelid);
+    }
+
     saveCar() {
         this.car = this.carForm.value;
         console.log(this.car);
         this.carService.insert(this.car);
     }
+
+
 }

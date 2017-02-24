@@ -1,14 +1,28 @@
 ﻿
 <h3>Új</h3>
-<select>
-    <option *ngFor="let carMake of carMakes" value="{{carMake.carMakeID}}">{{carMake.carMakeName}} {{carMake.carMakeID}}</option>
-</select>
 <form [formGroup]="carForm" novalidate>
     <div class="form-group">
-        <label for="carMakeID">Jármű márka</label>
-        <input class="form-control" id="name" formControlName="carMakeID" [style.border-color]="'red'">
-        <label for="carModelID">Jármű típus</label>
-        <input class="form-control" id="name" formControlName="carModelID" [style.border-color]="'red'">
+        <div class="form-inline">
+            <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+                <label for="carMakeID" class="col-xs-4">Jármű márka</label>
+                <div class="col-xs-8">
+                    <select #carmakeselected formControlName="carMakeID" (change)="SelectedCarMake(carmakeselected.value)" class="form-control">
+                        <option *ngFor="let carMake of carMakes" [value]="carMake.carMakeID">{{carMake.carMakeName}} {{carMake.carMakeID}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+                <!--<input class="form-control" id="name" formControlName="carMakeID" [style.border-color]="'red'">-->
+                <label for="carModelID" class="col-xs-4">Jármű típus</label>
+                <div class="col-xs-8">
+                    <select #carmodelselected formControlName="carModelID" (change)="SelectedCarModel(carmodelselected.value)" class="form-control">
+                        <option *ngFor="let carModel of carModels" [value]="carModel.carModelID">{{carModel.carModelName}} {{carModel.carModelID}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
         <label for="FuelTypeID">Üzemanyag típus</label>
         <input class="form-control" id="name" formControlName="FuelTypeID" [style.border-color]="'red'">
         <label for="VIN">Alvázszám</label>
@@ -27,7 +41,8 @@
 
 
     <button type="submit" class="btn btn-primary" (click)="saveCar()"
-            [disabled]="!carForm.valid"><!---->
+            [disabled]="!carForm.valid">
+        <!---->
         Save
         <span class="glyphicon glyphicon-refresh glyphicon-spin"></span>
     </button>

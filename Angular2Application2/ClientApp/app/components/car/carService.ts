@@ -5,6 +5,7 @@ import { Http, Response, RequestOptionsArgs, Headers } from "@angular/http";
 
 import Car = App.Models.ICar;
 import CarMake = App.Models.ICarMake;
+import CarModel = App.Models.ICarModel;
 
 @Injectable()
 export class CarService {
@@ -14,6 +15,7 @@ export class CarService {
 
     /* FORMHOZ */
     carMakes: Subject<CarMake[]>;
+    carModels: Subject<CarModel[]>;
     /* FORMHOZ VÉGE*/
 
     private defaultArgs: RequestOptionsArgs;
@@ -22,6 +24,7 @@ export class CarService {
         this.cars = new Subject<Car[]>();
         this.car = new Subject<Car>();
         this.carMakes = new Subject<CarMake[]>();
+        this.carModels = new Subject<CarModel[]>();
 
         let defaultHeaders: Headers = new Headers();
         defaultHeaders.append("Content-Type", "application/json")
@@ -83,6 +86,14 @@ export class CarService {
             (result: Response) => {
                 this.carMakes.next(result.json());
                 console.log("carMakes " + result.json()[0].carMakeName);
+            }, this.handleError);
+    }
+
+    getCarModelByCarMakeID(CarMakeID: number): void {
+        this.http.get("/api/Car/GetCarModelByCarMakeID?CarMakeID=" + CarMakeID).subscribe(
+            (result: Response) => {
+                this.carModels.next(result.json());
+                console.log("carModels from service " + result.json()[0].carModelName);
             }, this.handleError);
     }
     /* FORMHOZ VÉGE */

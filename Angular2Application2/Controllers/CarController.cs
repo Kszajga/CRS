@@ -27,8 +27,8 @@ namespace Angular2Application2.Controllers
         {
             var data = await _context.Car
                 .Where(c => c.CustomerID == customerID)
-                .Include(e => e.CarMake)
                 .Include(e => e.CarModel)
+                    .ThenInclude(f => f.CarMake)
                 .Include(e => e.FuelType)
                 .Include(e => e.ServiceIncidences)
                     .ThenInclude(c => c.ServiceIncidenceName)
@@ -42,8 +42,8 @@ namespace Angular2Application2.Controllers
         public async Task<IActionResult> GetCars()
         {
             var data = await _context.Car
-                .Include(e => e.CarMake)
                 .Include(e => e.CarModel)
+                    .ThenInclude(f => f.CarMake)
                 .Include(e => e.FuelType)
                 .Include(e => e.ServiceIncidences)
                     .ThenInclude(c => c.ServiceIncidenceName)
@@ -53,10 +53,21 @@ namespace Angular2Application2.Controllers
 
         [HttpGet("[action]")]
         [Route("")]
-        [ProducesResponseType(typeof(IEnumerable<Car>), 200)]
+        [ProducesResponseType(typeof(IEnumerable<CarMake>), 200)]
         public async Task<IActionResult> GetAllCarMakes()
         {
             var data = await _context.CarMake
+                .ToListAsync();
+            return Ok(data);
+        }
+        
+        [HttpGet("[action]")]
+        [Route("")]
+        [ProducesResponseType(typeof(IEnumerable<CarModel>), 200)]
+        public async Task<IActionResult> GetCarModelByCarMakeID(int carmakeid)
+        {
+            var data = await _context.CarModel
+                .Where(c => c.CarMakeID == carmakeid)
                 .ToListAsync();
             return Ok(data);
         }

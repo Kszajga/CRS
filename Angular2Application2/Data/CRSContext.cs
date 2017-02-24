@@ -36,12 +36,11 @@ namespace Angular2Application2.Data
             carTableModel.HasKey(p => p.CarID);
             carTableModel.HasOne(s => s.Customer);
             carTableModel.HasOne(s => s.FuelType);
-            carTableModel.HasOne(s => s.CarMake);
             carTableModel.HasOne(s => s.CarModel);
             carTableModel.Property(p => p.CarID).UseSqlServerIdentityColumn();
             carTableModel.Property(p => p.VIN).IsRequired();
             carTableModel.HasMany(s => s.ServiceIncidences);
-
+            
             var serviceIncidenceTableMdoel = modelBuilder.Entity<ServiceIncidence>();
             serviceIncidenceTableMdoel.HasKey(p => p.ServiceIncidenceID);
             serviceIncidenceTableMdoel.Property(p => p.ServiceIncidenceID).UseSqlServerIdentityColumn();
@@ -60,11 +59,12 @@ namespace Angular2Application2.Data
             var carMakeTableModel = modelBuilder.Entity<CarMake>();
             carMakeTableModel.HasKey(p => p.CarMakeID);
             carMakeTableModel.Property(p => p.CarMakeID).UseSqlServerIdentityColumn();
-            //carMakeTableModel.HasMany(s => s.Cars);
+            carMakeTableModel.HasMany(p => p.CarModel);
 
             var carModelTableModel = modelBuilder.Entity<CarModel>();
             carModelTableModel.HasKey(p => p.CarModelID);
             carModelTableModel.Property(p => p.CarModelID).UseSqlServerIdentityColumn();
+            carModelTableModel.HasOne(s => s.CarMake);
             carModelTableModel.HasMany(s => s.Cars);
 
         }

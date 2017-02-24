@@ -27,19 +27,7 @@ namespace Angular2Application2.Data
                 context.Customer.Add(c);
             }
             context.SaveChanges();
-
-            var carmodels = new CarModel[]
-            {
-                new CarModel {CarModelName = "Swift" },
-                new CarModel {CarModelName = "6" }
-            };
-
-            foreach (CarModel c in carmodels)
-            {
-                context.CarModel.Add(c);
-            }
-            context.SaveChanges();
-
+            
             var carmakes = new CarMake[]
             {
                 new CarMake {CarMakeName = "Suzuki" },
@@ -49,6 +37,18 @@ namespace Angular2Application2.Data
             foreach (CarMake c in carmakes)
             {
                 context.CarMake.Add(c);
+            }
+            context.SaveChanges();
+
+            var carmodels = new CarModel[]
+            {
+                new CarModel {CarModelName = "Swift", CarMakeID = 1 },
+                new CarModel {CarModelName = "6", CarMakeID = 2 }
+            };
+
+            foreach (CarModel c in carmodels)
+            {
+                context.CarModel.Add(c);
             }
             context.SaveChanges();
 
@@ -66,8 +66,8 @@ namespace Angular2Application2.Data
 
             var cars = new Car[]
             {
-                new Car {CarMakeID = 1, CarModelID = 1, Color = "zöld", CustomerID = 1, EngineNumber = "G13BA", FuelTypeID = 1, VIN = "TSMMA"},
-                new Car {CarMakeID = 2, CarModelID = 2, Color = "kék", CustomerID = 1, EngineNumber = "RF5C", FuelTypeID = 2, VIN = "J"}
+                new Car {CarModelID = 1, Color = "zöld", CustomerID = 1, EngineNumber = "G13BA", FuelTypeID = 1, VIN = "TSMMA"},
+                new Car {CarModelID = 2, Color = "kék", CustomerID = 1, EngineNumber = "RF5C", FuelTypeID = 2, VIN = "J"}
             };
 
             foreach (Car c in cars)
