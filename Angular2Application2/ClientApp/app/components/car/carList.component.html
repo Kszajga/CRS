@@ -14,11 +14,16 @@
     <tbody>
         <tr *ngFor="let car of cars">
             <td>{{ car.vin }}</td>
-            <td>{{ car.carMake.carMakeName }}</td>
+            <td>{{ car.carModel.carMake.carMakeName }}</td>
             <td>{{ car.carModel.carModelName }}</td>
             <td>
                 <ul>
-                    <li *ngFor="let si of car.serviceIncidences">{{ si.serviceIncidenceName.incidenceName }} {{ si.repairDate | date:'yyyy. MM. dd.'}}</li>
+                    <li *ngFor="let si of car.serviceIncidences">
+                        {{ si.serviceIncidenceName.incidenceName }} {{ si.repairDate | date:'yyyy. MM. dd.'}}
+                        <ul>
+                            <li *ngFor="let carpart of si.serviceIncidenceCarPart">{{carpart.carPart.carPartName}} {{carpart.carPart.price}}</li>
+                        </ul>
+                    </li>
                 </ul>
             </td>
         </tr>

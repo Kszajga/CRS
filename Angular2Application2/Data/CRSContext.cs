@@ -18,6 +18,8 @@ namespace Angular2Application2.Data
         public DbSet<CarMake> CarMake {get;set;}
         public DbSet<CarModel> CarModel { get; set; }
         public DbSet<FuelType> FuelType { get; set; }
+        public DbSet<ServiceIncidenceCarPart> ServiceIncidenceCarPart { get; set; }
+        public DbSet<CarPart> CarPart { get; set; }
 
         public DbSet<ServiceIncidence> ServiceIncidence { get; set; }
         public DbSet<ServiceIncidenceName> ServiceIncidenceName { get; set; }
@@ -67,6 +69,18 @@ namespace Angular2Application2.Data
             carModelTableModel.HasOne(s => s.CarMake);
             carModelTableModel.HasMany(s => s.Cars);
 
+            modelBuilder.Entity<ServiceIncidenceCarPart>()
+            .HasKey(t => new { t.CarPartID, t.ServiceIncidenceID });
+
+            modelBuilder.Entity<ServiceIncidenceCarPart>()
+                .HasOne(pt => pt.ServiceIncidence)
+                .WithMany(p => p.ServiceIncidenceCarPart)
+                .HasForeignKey(pt => pt.ServiceIncidenceID);
+
+            modelBuilder.Entity<ServiceIncidenceCarPart>()
+                .HasOne(pt => pt.CarPart)
+                .WithMany(t => t.ServiceIncidenceCarPart)
+                .HasForeignKey(pt => pt.CarPartID);
         }
     }
 }

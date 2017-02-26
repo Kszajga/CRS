@@ -12,7 +12,7 @@ namespace Angular2Application2.Data
         {
             context.Database.EnsureCreated();
 
-            if (context.Customer.Any())
+            if (context.ServiceIncidenceCarPart.Any())
             {
                 return;
             }
@@ -75,6 +75,55 @@ namespace Angular2Application2.Data
                 context.Car.Add(c);
             }
             context.SaveChanges();
+
+            var carparts = new CarPart[]
+            {
+                new CarPart {CarPartName = "kuplung", Price = 84000},
+                new CarPart {CarPartName = "hátsó féknyereg", Price = 39500}
+            };
+
+            foreach (CarPart c in carparts)
+            {
+                context.CarPart.Add(c);
+            }
+            context.SaveChanges();
+
+            var serviceincidencenames = new ServiceIncidenceName[]
+            {
+                new ServiceIncidenceName {IncidenceName = "javítás?" }
+            };
+            foreach (ServiceIncidenceName c in serviceincidencenames)
+            {
+                context.ServiceIncidenceName.Add(c);
+            }
+            context.SaveChanges();
+
+            var serviceincidences = new ServiceIncidence[]
+            {
+                new ServiceIncidence { CarID = 1, RepairDate = DateTime.Parse("2017.03.01."), ServiceIncidenceNameID = 1}
+            };
+            foreach (ServiceIncidence c in serviceincidences)
+            {
+                context.ServiceIncidence.Add(c);
+            }
+            context.SaveChanges();
+
+            var serviceincidencecarparts = new ServiceIncidenceCarPart[]
+            {
+                new ServiceIncidenceCarPart { CarPartID = 1, ServiceIncidenceID = 1 },
+                new ServiceIncidenceCarPart { CarPartID = 2, ServiceIncidenceID = 1 }
+            };
+            foreach (ServiceIncidenceCarPart c in serviceincidencecarparts)
+            {
+                context.ServiceIncidenceCarPart.Add(c);
+            }
+            context.SaveChanges();
+
+                        
+
+            
+
+            
         }
     }
 }

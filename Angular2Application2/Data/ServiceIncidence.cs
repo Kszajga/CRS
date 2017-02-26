@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Angular2Application2.Data
 {
@@ -13,6 +14,8 @@ namespace Angular2Application2.Data
 
         public int ServiceIncidenceNameID { get; set; }
         public ServiceIncidenceName ServiceIncidenceName { get; set; }
+
+        public List<ServiceIncidenceCarPart> ServiceIncidenceCarPart { get; set; }
 
         public DateTime RepairDate { get; set; }
     }

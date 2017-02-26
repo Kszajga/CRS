@@ -47,6 +47,9 @@ namespace Angular2Application2.Controllers
                 .Include(e => e.FuelType)
                 .Include(e => e.ServiceIncidences)
                     .ThenInclude(c => c.ServiceIncidenceName)
+                .Include(e => e.ServiceIncidences)
+                    .ThenInclude(e=>e.ServiceIncidenceCarPart)
+                        .ThenInclude(e => e.CarPart)
                 .ToListAsync();
             return Ok(data);
         }

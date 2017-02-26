@@ -84,6 +84,20 @@ namespace Angular2Application2.Migrations
                     b.ToTable("CarModel");
                 });
 
+            modelBuilder.Entity("Angular2Application2.Data.CarPart", b =>
+                {
+                    b.Property<int>("CarPartID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("CarPartName");
+
+                    b.Property<int>("Price");
+
+                    b.HasKey("CarPartID");
+
+                    b.ToTable("CarPart");
+                });
+
             modelBuilder.Entity("Angular2Application2.Data.Customer", b =>
                 {
                     b.Property<int>("CustomerID")
@@ -148,6 +162,19 @@ namespace Angular2Application2.Migrations
                     b.ToTable("ServiceIncidence");
                 });
 
+            modelBuilder.Entity("Angular2Application2.Data.ServiceIncidenceCarPart", b =>
+                {
+                    b.Property<int>("CarPartID");
+
+                    b.Property<int>("ServiceIncidenceID");
+
+                    b.HasKey("CarPartID", "ServiceIncidenceID");
+
+                    b.HasIndex("ServiceIncidenceID");
+
+                    b.ToTable("ServiceIncidenceCarPart");
+                });
+
             modelBuilder.Entity("Angular2Application2.Data.ServiceIncidenceName", b =>
                 {
                     b.Property<int>("ServiceIncidenceNameID")
@@ -205,6 +232,19 @@ namespace Angular2Application2.Migrations
                     b.HasOne("Angular2Application2.Data.ServiceIncidenceName", "ServiceIncidenceName")
                         .WithMany("ServiceIncidences")
                         .HasForeignKey("ServiceIncidenceNameID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Angular2Application2.Data.ServiceIncidenceCarPart", b =>
+                {
+                    b.HasOne("Angular2Application2.Data.CarPart", "CarPart")
+                        .WithMany("ServiceIncidenceCarPart")
+                        .HasForeignKey("CarPartID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Angular2Application2.Data.ServiceIncidence", "ServiceIncidence")
+                        .WithMany("ServiceIncidenceCarPart")
+                        .HasForeignKey("ServiceIncidenceID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
         }
