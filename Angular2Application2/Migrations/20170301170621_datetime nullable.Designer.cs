@@ -8,9 +8,10 @@ using Angular2Application2.Data;
 namespace Angular2Application2.Migrations
 {
     [DbContext(typeof(CRSContext))]
-    partial class CRSContextModelSnapshot : ModelSnapshot
+    [Migration("20170301170621_datetime nullable")]
+    partial class datetimenullable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.0-rtm-22752")
@@ -117,7 +118,7 @@ namespace Angular2Application2.Migrations
 
                     b.Property<string>("IDNumber");
 
-                    b.Property<DateTime?>("LastModified")
+                    b.Property<DateTime>("LastModified")
                         .ValueGeneratedOnAddOrUpdate();
 
                     b.Property<string>("LastName");
@@ -126,7 +127,7 @@ namespace Angular2Application2.Migrations
 
                     b.Property<string>("PhoneNumber");
 
-                    b.Property<DateTime?>("RegisterDate")
+                    b.Property<DateTime>("RegisterDate")
                         .ValueGeneratedOnAdd();
 
                     b.HasKey("CustomerID");

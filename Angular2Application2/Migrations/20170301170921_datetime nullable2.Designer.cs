@@ -8,9 +8,10 @@ using Angular2Application2.Data;
 namespace Angular2Application2.Migrations
 {
     [DbContext(typeof(CRSContext))]
-    partial class CRSContextModelSnapshot : ModelSnapshot
+    [Migration("20170301170921_datetime nullable2")]
+    partial class datetimenullable2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.0-rtm-22752")

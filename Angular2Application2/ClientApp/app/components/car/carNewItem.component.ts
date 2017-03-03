@@ -7,6 +7,7 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import ICar = App.Models.ICar;
 import ICarMake = App.Models.ICarMake;
 import ICarModel = App.Models.ICarModel;
+import IFuelType = App.Models.IFuelType;
 
 @Component({
     selector: 'carNewItem',
@@ -17,8 +18,9 @@ export class CarNewItemComponent implements OnInit {
     car: ICar = null;
     carMakes: ICarMake[];
     carModels: ICarModel[];
+    fuelTypes: IFuelType[];
     carForm: FormGroup;
-
+    private customerID;
 
     private state: ICar = null;
     
@@ -31,31 +33,35 @@ export class CarNewItemComponent implements OnInit {
         private formBuilder: FormBuilder
     ){
         this.carService.carMakes.subscribe(this.processData);
-
         this.carService.carModels.subscribe(this.carmodelData);
+        this.carService.fuelTypes.subscribe(this.fueltypeData);
     }
 
     private processData = (data: ICarMake[]) => {
         this.carMakes = data;
     }
-
     private carmodelData = (data: ICarModel[]) => {
         this.carModels = data;
+    }
+    private fueltypeData = (data: IFuelType[]) => {
+        this.fuelTypes = data;
     }
 
     ngOnInit(): void {
         this.carService.getAllCarMakes();
-        
+        this.carService.getFuelTypes();
+        this.customerID = this.route.snapshot.params['customerID'];
         console.log("carmakes from component " + this.carMakes);
         console.log("car from component " + this.car);
         this.carForm = this.formBuilder.group({
             "carMakeID": [null, Validators.compose([Validators.required])],
             "carModelID": [null, Validators.compose([Validators.required])],
-            "FuelTypeID": [null, Validators.compose([Validators.required])],
-            "VIN": [null, Validators.compose([Validators.required])],
+            "fuelTypeID": [null, Validators.compose([Validators.required])],
+            "vin": [null, Validators.compose([Validators.required])],
             "engineNumber": [null, Validators.compose([Validators.required])],
             "color": [null, Validators.compose([Validators.required])],
-            "customerID": [null, Validators.compose([Validators.required])]
+            "customerID": [this.customerID],
+            "licenseplate": [null, Validators.compose([Validators.required])]
 
         });
     }
@@ -69,9 +75,14 @@ export class CarNewItemComponent implements OnInit {
         console.log(carmodelid);
     }
 
+    SelectedFuelType(fueltypeid: number) {
+        console.log(fueltypeid);
+    }
+
     saveCar() {
         this.car = this.carForm.value;
-        console.log(this.car);
+        console.log("this.car" + this.car.carModelID + " " + this.car.carMakeID + " " + this.car.engineNumber + " " + this.car.color + " " + this.car.vin + " " + this.car.customerID);
+        alert(this.car);
         this.carService.insert(this.car);
     }
 

@@ -29,13 +29,3 @@ export class CarListItemComponent implements OnInit {
         this.carService.getCarByCustomerID(this.customerID);
     }    
 }
-
-interface Car {
-    carMake: string;
-    carModel: string;
-    vin: string;
-    engineNumber: string;
-    fuelType: string;
-    color: string;
-    //serviceIncidences: string[];
-}

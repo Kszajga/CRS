@@ -1,0 +1,84 @@
+﻿import { Component, OnInit } from '@angular/core';
+import { Params, Router, ActivatedRoute } from "@angular/router";
+import { Subscription } from "rxjs/Subscription";
+import { CustomerService } from "./customerService";
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+
+import ICustomer = App.Models.ICustomer;
+
+@Component({
+    selector: 'customer-new',
+    template: require('./customerNewItem.component.html')
+})
+export class CustomerNewItemComponent implements OnInit {
+    customer: ICustomer = null;
+    private customerID: number;
+    
+    customerForm: FormGroup;
+    private state: ICustomer = null;
+    private subscription: Subscription;
+    
+    constructor(
+        private router: Router,
+        private customerService: CustomerService,
+        private route: ActivatedRoute,
+        private formBuilder: FormBuilder
+    ) {}
+
+    private processData = (data: ICustomer) => {
+        this.customer = data;
+        //this.customerForm.patchValue(this.customer[0]);
+    }
+
+    ngOnInit(): void {
+        this.customerID = 0;
+        //GET CustomerID
+        this.customerID = this.route.snapshot.params['customerID'];
+
+        if (this.customerID > 0) {
+            this.customerService.getCustomerById(this.customerID);            
+        }
+        else {
+        }
+
+        this.subscription = this.customerService.customer.subscribe(this.processData);
+
+        this.customerForm = this.formBuilder.group({
+            "customerID": [0],
+            "lastName": [null, Validators.compose([Validators.required])],
+            "firstName": [null, Validators.compose([Validators.required])],
+            "birthplace": [""],
+            "birthday": [""],
+            "address": [""],
+            "idNumber": [""],
+            "phoneNumber": [null, Validators.compose([Validators.required])],
+            "nameOfMother": [""],
+            "registerDate": [new Date()],
+            "lastModified": [new Date()]
+        });
+    }
+
+    saveCustomer() {
+        this.customer = this.customerForm.value;
+        
+        if (this.customer.customerID === 0) {
+            var sajt = this.customerService.insert(this.customer);
+            //this.router.navigate(["/newcar/" + sajt.]);
+            sajt
+                .then(r => console.log("then: " + r))
+                .catch(e => console.log("reject: " + e));
+        } else {
+            this.customerService.update(this.customer);
+        }
+        //this.customerForm.reset();
+    }
+
+    back() {
+        console.log("dirty? " + this.customerForm.dirty);
+        if (this.customerForm.dirty) {
+            alert("Visszalépés előtt mentsen!");
+        } else {
+            this.router.navigate(["customers"]);
+        }
+    }
+}

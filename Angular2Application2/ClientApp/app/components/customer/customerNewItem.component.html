@@ -1,0 +1,159 @@
+﻿
+<h3>Új ügyfél</h3>
+<form [formGroup]="customerForm" class="well form-horizontal" novalidate>
+    <div class="form-group" [ngClass]="{'has-error':!customerForm.controls['lastName'].valid}">
+        <label class="col-md-4 control-label">Vezetéknév*</label>
+        <div class="col-md-4 inputGroupContainer">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                <input name="LastName" id="LastName" placeholder="Vezetéknév" formControlName="lastName" class="form-control" type="text">
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group" [ngClass]="{'has-error':!customerForm.controls['firstName'].valid}">
+        <label class="col-md-4 control-label">Keresztnév*</label>
+        <div class="col-md-4 inputGroupContainer">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                <input name="Firstname" id="Firstname" placeholder="Keresztnév" formControlName="firstName" class="form-control" type="text">
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group" [ngClass]="{'has-error':!customerForm.controls['phoneNumber'].valid}">
+        <label class="col-md-4 control-label">Telefonszám*</label>
+        <div class="col-md-4 inputGroupContainer">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+                <input name="PhoneNumber" id="Firstname" placeholder="Telefonszám" formControlName="phoneNumber" class="form-control" type="text">
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-md-4 control-label">Lakcím</label>
+        <div class="col-md-4 inputGroupContainer">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                <input name="Address" id="Address" placeholder="Lakcím" formControlName="address" class="form-control" type="text">
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-md-4 control-label">Személyi igazolványszám</label>
+        <div class="col-md-4 inputGroupContainer">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                <input name="IDNumber" id="IDNumber" placeholder="Személyi igazolványszám" formControlName="idNumber" class="form-control" type="text">
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-md-4 control-label">Születési hely</label>
+        <div class="col-md-4 inputGroupContainer">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                <input name="Birthplace" id="Birthplace" placeholder="Születési hely" formControlName="birthplace" class="form-control" type="text">
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-md-4 control-label">Születési idő</label>
+        <div class="col-md-4 inputGroupContainer">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                <input name="Birthday" id="Birthday" placeholder="Születési idő" formControlName="birthday" class="form-control" type="text">
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-md-4 control-label">Anyja neve</label>
+        <div class="col-md-4 inputGroupContainer">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                <input name="NameOfMother" id="NameOfMother" placeholder="Anyja neve" formControlName="nameOfMother" class="form-control" type="text">
+            </div>
+        </div>
+    </div>
+
+    <!--<div class="row">
+        <!--<div class="col-xs-12 col-sm-4 col-lg-4">
+            <div class="form-group">
+                <div class="form-group" [ngClass]="{'has-error':!customerForm.controls['Surname'].valid}">
+                    <label for="Surname">Vezetéknév*</label>
+                    <input class="form-control" type="text" id="Surname" formControlName="Surname" />
+                </div>
+            </div>
+        </div>-->
+
+        <!--<div class="col-xs-12 col-sm-4 col-lg-4">
+            <div class="form-group" [ngClass]="{'has-error':!customerForm.controls['Firstname'].valid}">
+                <div class="form-group">
+                    <label for="Firstname">Keresztnév*</label>
+                    <input class="form-control" type="text" id="Firstname" formControlName="Firstname" />
+                </div>
+            </div>
+        </div>-->
+
+        <!--<div class="col-xs-12 col-sm-4 col-lg-4">
+            <div class="form-group">
+                <div class="form-group">
+                    <label for="Birthplace">Születési hely</label>
+                    <input class="form-control" type="text" id="Birthplace" formControlName="Birthplace" />
+                </div>
+            </div>
+        </div>
+    </div>-->
+
+    <!--<div class="row">
+        <div class="col-xs-12 col-sm-4 col-lg-4">
+            <div class="form-group" [ngClass]="{'has-error':!customerForm.controls['PhoneNumber'].valid}">
+                <label for="PhoneNumber">Telefonszám*</label>
+                <input class="form-control" type="text" id="PhoneNumber" formControlName="PhoneNumber" />
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-lg-4">
+            <div class="form-group">
+                <label for="Address">Lakcím</label>
+                <input class="form-control" type="text" id="Address" formControlName="Address" />
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-lg-4">
+            <div class="form-group">
+                <label for="Birthday">Születésnap</label>
+                <input class="form-control" type="text" id="Birthday" formControlName="Birthday" />
+            </div>
+        </div>
+    </div>-->
+
+    <!--<div class="row">
+
+        <label for="NameOfMother">Anyja neve</label>
+        <input class="form-control" id="NameOfMother" formControlName="NameOfMother">
+        <label for="IDNumber">Szigszám</label>
+        <input class="form-control" id="IDNumber" formControlName="IDNumber">
+
+        <!--<div *ngIf="carForm.controls.carMakeID.hasError('required')" class="alert alert-danger">Name is required!</div>
+        <div *ngIf="carForm.controls.carMakeID.hasError('maxlength')" class="alert alert-danger">Name is too long!</div>
+        <div *ngIf="carForm.controls.carMakeID.hasError('dupe')" class="alert alert-danger">Name is a duplicate!</div>
+    </div>-->
+
+
+    <button type="submit" class="btn btn-primary" (click)="saveCustomer()"
+            [disabled]="!customerForm.valid">
+        <!---->
+        Save
+        <span class="glyphicon glyphicon-refresh glyphicon-spin"></span>
+    </button>
+    <button type="button" class="btn btn-warning" (click)="cancel()">Cancel</button>
+    <button type="button" class="btn btn-danger" (click)="onDelete()">Delete</button>
+    <button type="button" class="btn btn-default" (click)="back()">Back</button>
+
+    <!--<div *ngIf="!carForm.valid" class="alert alert-danger">Correct all invalid values to enable save.</div>-->
+
+</form>

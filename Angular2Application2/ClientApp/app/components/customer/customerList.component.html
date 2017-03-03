@@ -1,0 +1,36 @@
+﻿<h1>Ügyfelek</h1>
+
+<p *ngIf="!customers"><em>Loading...</em></p>
+<table class='table' *ngIf="customers">
+    <thead>
+        <tr>
+            <th>Vezetéknév</th>
+            <th>Keresztnév</th>
+            <th>Telefonszám</th>
+            <th>Szerk.</th>
+            <!--<th>ServiceIncidences</th>-->
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let customer of customers" (click)="viewCustomer(customer.customerID)">
+            <td>{{ customer.lastName }}</td>
+            <td>{{ customer.firstName}}</td>
+            <td>{{ customer.phoneNumber }}</td>
+            <td>
+                <button type="button" class="btn btn-primary btn-sm" (click)="editCustomer(customer.customerID)">
+                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                </button>
+            </td>
+            <!--<td>
+                <ul>
+                    <li *ngFor="let si of car.serviceIncidences">
+                        {{ si.serviceIncidenceName.incidenceName }} {{ si.repairDate | date:'yyyy. MM. dd.'}}
+                        <ul>
+                            <li *ngFor="let carpart of si.serviceIncidenceCarPart">{{carpart.carPart.carPartName}} {{carpart.carPart.price}}</li>
+                        </ul>
+                    </li>
+                </ul>
+            </td>-->
+        </tr>
+    </tbody>
+</table>

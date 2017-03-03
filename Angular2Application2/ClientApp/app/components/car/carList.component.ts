@@ -11,7 +11,6 @@ import ICar = App.Models.ICar;
 })
 export class CarListComponent implements OnInit {
     public cars: ICar[];
-
     
     constructor(
         private carService: CarService,
@@ -27,14 +26,4 @@ export class CarListComponent implements OnInit {
     ngOnInit() {
         this.carService.getAllCar();
     }        
-}
-
-interface Car {
-    carMake: string;
-    carModel: string;
-    vin: string;
-    engineNumber: string;
-    fuelType: string;
-    color: string;
-    //serviceIncidences: string[];
 }

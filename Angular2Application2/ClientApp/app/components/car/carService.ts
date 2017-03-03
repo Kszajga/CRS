@@ -6,6 +6,7 @@ import { Http, Response, RequestOptionsArgs, Headers } from "@angular/http";
 import Car = App.Models.ICar;
 import CarMake = App.Models.ICarMake;
 import CarModel = App.Models.ICarModel;
+import FuelType = App.Models.IFuelType;
 
 @Injectable()
 export class CarService {
@@ -16,6 +17,7 @@ export class CarService {
     /* FORMHOZ */
     carMakes: Subject<CarMake[]>;
     carModels: Subject<CarModel[]>;
+    fuelTypes: Subject<FuelType[]>;
     /* FORMHOZ VÉGE*/
 
     private defaultArgs: RequestOptionsArgs;
@@ -25,6 +27,7 @@ export class CarService {
         this.car = new Subject<Car>();
         this.carMakes = new Subject<CarMake[]>();
         this.carModels = new Subject<CarModel[]>();
+        this.fuelTypes = new Subject<FuelType[]>();
 
         let defaultHeaders: Headers = new Headers();
         defaultHeaders.append("Content-Type", "application/json")
@@ -71,8 +74,8 @@ export class CarService {
     }
 
     insert(car: Car): void {
-        console.log("serviceből: " + car);
-        this.http.post("/api/Car",
+        console.log("this.car" + car.carModelID + " " + car.carMakeID + " " + car.engineNumber + " " + car.color + " " + car.vin + " " + car.customerID);
+        this.http.post("/api/Car/",
             JSON.stringify(car),
             this.defaultArgs)
             .subscribe((result: Response) => {
@@ -94,6 +97,14 @@ export class CarService {
             (result: Response) => {
                 this.carModels.next(result.json());
                 console.log("carModels from service " + result.json()[0].carModelName);
+            }, this.handleError);
+    }
+
+    getFuelTypes(): void {
+        this.http.get("/api/Car/GetFuelTypes").subscribe(
+            (result: Response) => {
+                this.fuelTypes.next(result.json());
+                console.log("fuelTypes from service " + result.json()[0].fuelTypeName);
             }, this.handleError);
     }
     /* FORMHOZ VÉGE */

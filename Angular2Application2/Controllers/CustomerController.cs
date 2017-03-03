@@ -56,5 +56,51 @@ namespace Angular2Application2.Controllers
                 .ToListAsync();
             return Ok(data);
         }
+
+        [HttpPost]
+        [Route("")]
+        [ProducesResponseType(typeof(Customer), 200)]
+        public async Task<IActionResult> Insert([FromBody] Customer customer)
+        {
+            Console.Write(customer);
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Entry(customer).State = EntityState.Added;
+                    await _context.SaveChangesAsync();
+                    //return Created("", customer);
+                    return Ok(customer);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    throw;
+                }
+
+            }
+            return BadRequest(ModelState);
+        }
+
+        [HttpPut]
+        [Route("")]
+        public async Task<IActionResult> Update([FromBody] Customer customer)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Update(customer);
+                try
+                {
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    return NotFound(customer);
+                }
+
+                return new NoContentResult();
+            }
+            return BadRequest(ModelState);
+        }
     }
 }

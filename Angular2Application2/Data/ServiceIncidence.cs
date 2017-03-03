@@ -10,6 +10,8 @@ namespace Angular2Application2.Data
 
         public int CarID { get; set; }
         public Car Car { get; set; }
+        public int Mileage { get; set; }
+        public int ManHour { get; set; }
 
 
         public int ServiceIncidenceNameID { get; set; }

@@ -1,0 +1,84 @@
+﻿<p *ngIf="!customer"><em>Loading...</em></p>
+<div class="panel-group">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" href="#customer">Ügyfél adatai</a>
+            </h4>
+        </div>
+        <div id="customer" class="panel-collapse collapse in" aria-expanded="true">
+            <div class="panel-body">
+                <table class='table' *ngIf="customer">
+                    <thead>
+                        <tr>
+                            <th>Vezetéknév</th>
+                            <th>Keresztnév</th>
+                            <th>Telefonszám</th>
+                            <th>Szerk.</th>
+                            <!--<th>ServiceIncidences</th>-->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let customer of customer">
+                            <td>{{ customer.lastName }}</td>
+                            <td>{{ customer.firstName}}</td>
+                            <td>{{ customer.phoneNumber }}</td>
+                            <td>
+                                <button type="button" class="btn btn-primary btn-sm" (click)="editCustomer(customer.customerID)">
+                                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="panel-footer">Panel Footer</div>
+        </div>
+    </div>
+</div>
+<div *ngFor="let customer of customer">
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <span class="panel-title">
+                    <a data-toggle="collapse" href="#cars">Ügyfél járművei</a>
+                </span>
+                <button type="button" class="btn btn-primary btn-sm" (click)="addCar(customer.customerID)">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>{{customer.customerID}}
+                </button>
+            </div>
+            <div id="cars" class="panel-collapse collapse in" aria-expanded="true">
+                <div class="panel-body">
+
+
+                    <div *ngFor="let car of customer.cars">
+                        <div class="panel-group">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" href="#car{{car.carID}}">{{car.carModel.carMake.carMakeName}} {{car.carModel.carModelName}}</a>
+                                    </h4>
+                                </div>
+                                <div id="car{{car.carID}}" class="panel-collapse collapse" aria-expanded="true">
+                                    <div class="panel-body">
+
+
+                                        {{car.carModel.carMake.carMakeName}} {{car.carModel.carModelName}}
+
+                                    </div>
+                                    <!--<div class="panel-footer">Panel Footer</div>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+            </div>
+
+            <!--<div class="panel-footer">Panel Footer</div>-->
+        </div>
+    </div>
+</div>

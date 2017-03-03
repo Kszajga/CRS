@@ -17,6 +17,7 @@ namespace Angular2Application2.Data
         public string VIN { get; set; }
         public string EngineNumber { get; set; }
         public string Color { get; set; }
+        public string LicensePlate { get; set; }
 
         public int CustomerID { get; set; }
         public Customer Customer { get; set; }

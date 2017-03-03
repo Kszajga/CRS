@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { UniversalModule } from 'angular2-universal';
+
 import { AppComponent } from './components/app/app.component'
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { HomeComponent } from './components/home/home.component';
@@ -11,6 +12,12 @@ import { CarListComponent } from './components/car/carList.component';
 import { CarListItemComponent } from './components/car/carListItem.component';
 import { CarNewItemComponent } from "./components/car/carNewItem.component";
 import { CarService } from './components/car/carService';
+
+import { CustomerListComponent } from './components/customer/customerList.component';
+import { CustomerListItemComponent } from './components/customer/customerListItem.component';
+import { CustomerNewItemComponent } from './components/customer/customerNewItem.component';
+import { CustomerService } from './components/customer/customerService';
+
 import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
@@ -23,6 +30,9 @@ import { ReactiveFormsModule } from '@angular/forms';
         CarListComponent,
         CarListItemComponent,
         CarNewItemComponent,
+        CustomerListComponent,
+        CustomerListItemComponent,
+        CustomerNewItemComponent,
         HomeComponent
     ],
     imports: [
@@ -35,11 +45,16 @@ import { ReactiveFormsModule } from '@angular/forms';
             { path: 'fetch-data', component: FetchDataComponent },
             { path: 'car', component: CarListComponent },
             { path: 'car/:customerID', component: CarListItemComponent },
-            { path: 'newcar', component: CarNewItemComponent },
+            { path: 'newcar/:customerID', component: CarNewItemComponent },
+
+            { path: 'customers', component: CustomerListComponent },
+            { path: 'editcustomer/:customerID', component: CustomerNewItemComponent },
+            { path: 'viewcustomer/:customerID', component: CustomerListItemComponent },
+            { path: 'newcustomer', component: CustomerNewItemComponent },
             { path: '**', redirectTo: 'home' }            
         ])
     ],
-    providers: [CarService]
+    providers: [CarService, CustomerService]
 })
 
 export class AppModule {

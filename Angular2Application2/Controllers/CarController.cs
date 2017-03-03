@@ -75,6 +75,16 @@ namespace Angular2Application2.Controllers
             return Ok(data);
         }
 
+        [HttpGet("[action]")]
+        [Route("")]
+        [ProducesResponseType(typeof(IEnumerable<FuelType>), 200)]
+        public async Task<IActionResult> GetFuelTypes()
+        {
+            var data = await _context.FuelType
+                .ToListAsync();
+            return Ok(data);
+        }
+
         [HttpPost]
         [Route("")]
         [ProducesResponseType(typeof(Car), 200)]

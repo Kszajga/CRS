@@ -19,7 +19,7 @@ namespace Angular2Application2.Data
 
             var customers = new Customer[]
             {
-                new Customer {Birthday = DateTime.Parse("1990.06.08."), Birthplace = "Kapuvár", Deleted = false, FirstName = "Ádám", LastName = "Horváth", LastModified = DateTime.Parse("2017.02.18."), IDNumber = "458068LA", NameOfMother = "Jakab Márta", RegisterDate = DateTime.Parse("2017.02.13.")  }
+                new Customer {Birthday = DateTime.Parse("1990.06.08."), Birthplace = "Kapuvár", Deleted = false, FirstName = "Ádám", LastName = "Horváth", IDNumber = "458068LA", NameOfMother = "Jakab Márta"}
             };
 
             foreach ( Customer c in customers)
@@ -66,8 +66,8 @@ namespace Angular2Application2.Data
 
             var cars = new Car[]
             {
-                new Car {CarModelID = 1, Color = "zöld", CustomerID = 1, EngineNumber = "G13BA", FuelTypeID = 1, VIN = "TSMMA"},
-                new Car {CarModelID = 2, Color = "kék", CustomerID = 1, EngineNumber = "RF5C", FuelTypeID = 2, VIN = "J"}
+                new Car {CarModelID = 1, Color = "zöld", CustomerID = 1, EngineNumber = "G13BA", FuelTypeID = 1, VIN = "TSMMA", LicensePlate="FCB-225"},
+                new Car {CarModelID = 2, Color = "kék", CustomerID = 1, EngineNumber = "RF5C", FuelTypeID = 2, VIN = "J", LicensePlate="JZM-110"}
             };
 
             foreach (Car c in cars)
