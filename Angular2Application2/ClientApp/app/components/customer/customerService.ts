@@ -1,6 +1,7 @@
 ﻿import { Injectable } from "@angular/core";
 import { Observable } from 'rxjs/Observable';
 import { Subject } from "rxjs/Subject";
+import { Subscription } from "rxjs/Subscription";
 //import { Configuration } from "../configuration"; ez lehet, hogy nem kell
 import { Http, Response, RequestOptions, RequestOptionsArgs, Headers } from "@angular/http";
 
@@ -65,16 +66,8 @@ export class CustomerService {
             }, this.handleError);
     }
 
-    private extractData(res: Response) {
-        let body = res.json();
-        return body.data || {};
-    }
-
-    insert(customer: Customer): Subject<Customer> {        
-        return this.http.post("/api/Customer/", JSON.stringify(customer), this.defaultArgs)
-            .subscribe((result: Response) => {
-                this.customer.next(result.json());
-            }, this.handleError);
+    insert(customer: Customer): Observable<Response> {        
+        return this.http.post("/api/Customer/", JSON.stringify(customer), this.defaultArgs);
     }
 
     update(customer: Customer): void {

@@ -3,7 +3,7 @@ import { Params, Router, ActivatedRoute } from "@angular/router";
 import { Subscription } from "rxjs/Subscription";
 import { CustomerService } from "./customerService";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-
+import { Response } from "@angular/http";
 import ICustomer = App.Models.ICustomer;
 
 @Component({
@@ -65,11 +65,14 @@ export class CustomerNewItemComponent implements OnInit {
         
         if (this.customer.customerID === 0) {
             console.log("insert");
-            this.customerService.insert(this.customer);
+            this.customerService.insert(this.customer).subscribe((r: Response) => {
+                console.log("Jump to CustomerID: " + r.json().customerID);
+                this.router.navigate(["/newcar/" + r.json().customerID]);
+            });
 
-            this.subscription = this.customerService.customer.subscribe(this.processData);
-            console.log("subs"+ this.subscription);
-            //this.router.navigate(["/newcar/" + sajt.]);
+            //this.subscription = this.customerService.customer.subscribe(this.processData);
+            //console.log("subs"+ this.subscription);
+            
             //console.log(sajt);
         } else {
             console.log("update");

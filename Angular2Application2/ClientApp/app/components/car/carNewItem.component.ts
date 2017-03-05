@@ -51,8 +51,13 @@ export class CarNewItemComponent implements OnInit {
         this.carService.getAllCarMakes();
         this.carService.getFuelTypes();
         this.customerID = this.route.snapshot.params['customerID'];
-        console.log("carmakes from component " + this.carMakes);
-        console.log("car from component " + this.car);
+
+        if (this.customerID > 0) {
+            console.log("van user");
+        }
+
+        //console.log("carmakes from component " + this.carMakes);
+        //console.log("car from component " + this.car);
         this.carForm = this.formBuilder.group({
             "carMakeID": [null, Validators.compose([Validators.required])],
             "carModelID": [null, Validators.compose([Validators.required])],
@@ -81,9 +86,9 @@ export class CarNewItemComponent implements OnInit {
 
     saveCar() {
         this.car = this.carForm.value;
-        console.log("this.car" + this.car.carModelID + " " + this.car.carMakeID + " " + this.car.engineNumber + " " + this.car.color + " " + this.car.vin + " " + this.car.customerID);
-        alert(this.car);
+        //console.log("this.car" + this.car.carModelID + " " + this.car.carMakeID + " " + this.car.engineNumber + " " + this.car.color + " " + this.car.vin + " " + this.car.customerID);
         this.carService.insert(this.car);
+        this.router.navigate(["/viewcustomer/" + this.customerID]);
     }
 
 

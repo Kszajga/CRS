@@ -39,7 +39,8 @@
     "webpack-hot-middleware": "^2.10.0",
     "webpack-merge": "^0.14.1",
     "webpack-externals-plugin": "^1.0.0",
-    "zone.js": "^0.6.21"
+    "zone.js": "^0.6.21",
+    "font-awesome": "^4.7.0"
   },
   "devDependencies": {
     "webpack": "^1.0.1"
