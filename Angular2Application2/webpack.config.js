@@ -4,7 +4,7 @@ var webpack = require('webpack');
 var nodeExternals = require('webpack-node-externals');
 var merge = require('webpack-merge');
 var allFilenamesExceptJavaScript = /\.(?!js(\?|$))([^.]+(\?|$))/;
-var EncodingPlugin = require("webpack-encoding-plugin");
+//var EncodingPlugin = require("webpack-encoding-plugin");
 
 // Configuration in common to both client-side and server-side bundles
 var sharedConfig = {
@@ -22,11 +22,11 @@ var sharedConfig = {
             { test: /\.(png|jpg|jpeg|gif|svg)$/, loader: 'url', query: { limit: 25000 } }
         ]
     },
-    plugins: [
-        new EncodingPlugin({
-            encoding: 'utf8'
-        })
-    ]
+    //plugins: [
+    //    new EncodingPlugin({
+    //        encoding: 'utf8'
+    //    })
+    //]
 };
 
 // Configuration for client-side bundle suitable for running in browsers

@@ -27,7 +27,8 @@ export class CustomerNewItemComponent implements OnInit {
 
     private processData = (data: ICustomer) => {
         this.customer = data;
-        //this.customerForm.patchValue(this.customer[0]);
+        console.log("processData");
+        this.customerForm.patchValue(this.customer[0]);
     }
 
     ngOnInit(): void {
@@ -36,6 +37,7 @@ export class CustomerNewItemComponent implements OnInit {
         this.customerID = this.route.snapshot.params['customerID'];
 
         if (this.customerID > 0) {
+            console.log("customerID > 0");
             this.customerService.getCustomerById(this.customerID);            
         }
         else {
@@ -62,12 +64,15 @@ export class CustomerNewItemComponent implements OnInit {
         this.customer = this.customerForm.value;
         
         if (this.customer.customerID === 0) {
-            var sajt = this.customerService.insert(this.customer);
+            console.log("insert");
+            this.customerService.insert(this.customer);
+
+            this.subscription = this.customerService.customer.subscribe(this.processData);
+            console.log("subs"+ this.subscription);
             //this.router.navigate(["/newcar/" + sajt.]);
-            sajt
-                .then(r => console.log("then: " + r))
-                .catch(e => console.log("reject: " + e));
+            //console.log(sajt);
         } else {
+            console.log("update");
             this.customerService.update(this.customer);
         }
         //this.customerForm.reset();

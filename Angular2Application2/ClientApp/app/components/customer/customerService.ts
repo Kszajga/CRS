@@ -10,6 +10,7 @@ import Customer = App.Models.ICustomer;
 @Injectable()
 export class CustomerService {
     /* FORMHOZ */
+    sajt: Observable<Customer>;
     customer: Subject<Customer>;
     customers: Subject<Customer[]>;
     /* FORMHOZ VÉGE*/
@@ -17,8 +18,10 @@ export class CustomerService {
     private defaultArgs: RequestOptionsArgs;
     //private configuration: Configuration, 
     constructor(private http: Http) {
+        this.sajt = new Observable<Customer>();
         this.customer = new Subject<Customer>();
         this.customers = new Subject<Customer[]>();
+
         let defaultHeaders: Headers = new Headers();
         defaultHeaders.append("Content-Type", "application/json")
         this.defaultArgs = { headers: defaultHeaders };
@@ -56,27 +59,22 @@ export class CustomerService {
     }
 
     getCustomerById(customerID: number): void {
-        this.http.get("/api/Customer/GetCustomerByID?customerID=" + customerID).subscribe(
-            (result: Response) => {
+        this.http.get("/api/Customer/GetCustomerByID?customerID=" + customerID)
+            .subscribe((result: Response) => {
                 this.customer.next(result.json());
             }, this.handleError);
     }
 
-    insert(customer: Customer): Promise<{ [key: string]: any }> {
-        var p = new Promise<{ [key: string]: any }>((resolve, reject) => {
-        this.http.post("/api/Customer/",
-            JSON.stringify(customer),
-            this.defaultArgs)
+    private extractData(res: Response) {
+        let body = res.json();
+        return body.data || {};
+    }
+
+    insert(customer: Customer): Subject<Customer> {        
+        return this.http.post("/api/Customer/", JSON.stringify(customer), this.defaultArgs)
             .subscribe((result: Response) => {
                 this.customer.next(result.json());
-                }, this.handleError);
-        });
-
-        p.then(r => console.log("then: " + r)).catch(e => console.log("reject: " + e));
-
-        //console.log("service insert hivas " + p.then(r => console.log("then: " + r)).catch(e => console.log("reject: " + e)));
-        return p;
-        
+            }, this.handleError);
     }
 
     update(customer: Customer): void {
