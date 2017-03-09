@@ -11,7 +11,6 @@ import Customer = App.Models.ICustomer;
 @Injectable()
 export class CustomerService {
     /* FORMHOZ */
-    sajt: Observable<Customer>;
     customer: Subject<Customer>;
     customers: Subject<Customer[]>;
     /* FORMHOZ VÉGE*/
@@ -19,10 +18,10 @@ export class CustomerService {
     private defaultArgs: RequestOptionsArgs;
     //private configuration: Configuration, 
     constructor(private http: Http) {
-        this.sajt = new Observable<Customer>();
         this.customer = new Subject<Customer>();
         this.customers = new Subject<Customer[]>();
 
+        /* HTTP hívások beállítása */
         let defaultHeaders: Headers = new Headers();
         defaultHeaders.append("Content-Type", "application/json")
         this.defaultArgs = { headers: defaultHeaders };

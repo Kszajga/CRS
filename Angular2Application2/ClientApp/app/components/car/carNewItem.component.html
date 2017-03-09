@@ -1,43 +1,66 @@
 ﻿
-<h3>Új</h3>
-<form [formGroup]="carForm" novalidate>
-    <!--<div class="form-group" [ngClass]="{'has-error':!customerForm.controls['lastName'].valid}">
-        <label class="col-md-4 control-label">Vezetéknév*</label>
-        <div class="col-md-4 inputGroupContainer">
-            <div class="input-group">
-                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                <input name="LastName" id="LastName" placeholder="Vezetéknév" formControlName="lastName" class="form-control" type="text">
+<h3>Jármű adatai</h3>
+<form [formGroup]="carForm" class="well form-horizontal" novalidate>
+    <div class="form-group" [ngClass]="{'has-error':!carForm.controls['carMakeID'].valid}">
+        <label class="col-md-4 control-label">Jármű márka*</label>
+        <div class="col-md-4">
+            <div class="form-group">
+                <select #carmakeselected formControlName="carMakeID" (change)="SelectedCarMake(carmakeselected.value)" class="form-control">
+                    <option *ngFor="let carMake of carMakes" [value]="carMake.carMakeID">{{carMake.carMakeName}}</option>
+                </select>
             </div>
         </div>
-    </div>-->
+    </div>
+
+    <div class="form-group" [ngClass]="{'has-error':!carForm.controls['carModelID'].valid}">
+        <label class="col-md-4 control-label">Jármű típus*</label>
+        <div class="col-md-4">
+            <div class="form-group">
+                <select #carmodelselected formControlName="carModelID" (change)="SelectedCarModel(carmodelselected.value)" class="form-control">
+                    <option *ngFor="let carModel of carModels" [value]="carModel.carModelID">{{carModel.carModelName}}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group"> <!--[ngClass]="{'has-error':!carForm.controls['carModelID'].valid}"-->
+        <label class="col-md-4 control-label">Üzemanyag típus</label>
+        <div class="col-md-4">
+            <div class="form-group">
+                <select #fueltypeselected formControlName="fuelTypeID" (change)="SelectedFuelType(fueltypeselected.value)" class="form-control">
+                    <option *ngFor="let fuelType of fuelTypes" [value]="fuelType.fuelTypeID">{{fuelType.fuelTypeName}}</option>
+                </select>
+            </div>
+        </div>
+    </div>
 
     <div class="row">
-        <div class="col-xs-12 col-sm-4 col-lg-4">
+        <!--<div class="col-xs-12 col-sm-4 col-lg-4">
             <div class="form-group">
                 <label for="carMakeID">Jármű márka</label>
                 <select #carmakeselected formControlName="carMakeID" (change)="SelectedCarMake(carmakeselected.value)" class="form-control">
                     <option *ngFor="let carMake of carMakes" [value]="carMake.carMakeID">{{carMake.carMakeName}} {{carMake.carMakeID}}</option>
                 </select>
             </div>
-        </div>
+        </div>-->
 
-        <div class="col-xs-12 col-sm-4 col-lg-4">
+        <!--<div class="col-xs-12 col-sm-4 col-lg-4">
             <div class="form-group">
                 <label for="carModelID">Jármű típus</label>
                 <select #carmodelselected formControlName="carModelID" (change)="SelectedCarModel(carmodelselected.value)" class="form-control">
                     <option *ngFor="let carModel of carModels" [value]="carModel.carModelID">{{carModel.carModelName}} {{carModel.carModelID}}</option>
                 </select>
             </div>
-        </div>
+        </div>-->
 
-        <div class="col-xs-12 col-sm-4 col-lg-4">
+        <!--<div class="col-xs-12 col-sm-4 col-lg-4">
             <div class="form-group">
                 <label for="fuelTypeID">Üzemanyag típus</label>
                 <select #fueltypeselected formControlName="fuelTypeID" (change)="SelectedFuelType(fueltypeselected.value)" class="form-control">
                     <option *ngFor="let fuelType of fuelTypes" [value]="fuelType.fuelTypeID">{{fuelType.fuelTypeName}}</option>
                 </select>
             </div>
-        </div>
+        </div>-->
     </div>
     
     <div class="row">
@@ -74,12 +97,11 @@
             <button type="submit" class="btn btn-primary" (click)="saveCar()"
                     [disabled]="!carForm.valid">
                 <!---->
-                Save
+                Mentés
                 <span class="glyphicon glyphicon-refresh glyphicon-spin"></span>
             </button>
-            <button type="button" class="btn btn-warning" (click)="cancel()">Cancel</button>
-            <button type="button" class="btn btn-danger" (click)="onDelete()">Delete</button>
-            <button type="button" class="btn btn-default" (click)="back()">Back</button>
+            <button type="button" class="btn btn-danger" (click)="onDelete()">Törlés</button>
+            <button type="button" class="btn btn-warning" (click)="back()">Vissza</button>
 
             <!--<div *ngIf="!carForm.valid" class="alert alert-danger">Correct all invalid values to enable save.</div>-->
 

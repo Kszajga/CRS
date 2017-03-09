@@ -73,6 +73,14 @@ export class CarService {
             }, this.handleError);
     }
 
+    getCarByCarID(carID: number): void {
+        this.http.get("/api/Car/GetCarByCarID?carID=" + carID).subscribe(
+            (result: Response) => {
+                this.car.next(result.json());
+                //console.log("car " + result.json()[0].carModel.carModelName);
+            }, this.handleError);
+    }
+
     insert(car: Car): void {
         console.log("this.car" + car.carModelID + " " + car.carMakeID + " " + car.engineNumber + " " + car.color + " " + car.vin + " " + car.customerID);
         this.http.post("/api/Car/",
@@ -83,12 +91,22 @@ export class CarService {
             }, this.handleError);
     }
 
+    update(car: Car): void {
+        console.log("update car" + car);
+        this.http.put("/api/Car/",
+            JSON.stringify(car),
+            this.defaultArgs)
+            .subscribe((result: Response) => {
+                this.car.next(car);
+            }, this.handleError);
+    }
+
     /* FORMHOZ */
     getAllCarMakes(): void {
         this.http.get("/api/Car/GetAllCarMakes").subscribe(
             (result: Response) => {
                 this.carMakes.next(result.json());
-                console.log("carMakes " + result.json()[0].carMakeName);
+                //console.log("carMakes " + result.json()[0].carMakeName);
             }, this.handleError);
     }
 
@@ -96,7 +114,7 @@ export class CarService {
         this.http.get("/api/Car/GetCarModelByCarMakeID?CarMakeID=" + CarMakeID).subscribe(
             (result: Response) => {
                 this.carModels.next(result.json());
-                console.log("carModels from service " + result.json()[0].carModelName);
+                //console.log("carModels from service " + result.json()[0].carModelName);
             }, this.handleError);
     }
 
@@ -104,7 +122,7 @@ export class CarService {
         this.http.get("/api/Car/GetFuelTypes").subscribe(
             (result: Response) => {
                 this.fuelTypes.next(result.json());
-                console.log("fuelTypes from service " + result.json()[0].fuelTypeName);
+                //console.log("fuelTypes from service " + result.json()[0].fuelTypeName);
             }, this.handleError);
     }
     /* FORMHOZ VÉGE */

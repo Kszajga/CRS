@@ -20,7 +20,7 @@ export class CarNewItemComponent implements OnInit {
     carModels: ICarModel[];
     fuelTypes: IFuelType[];
     carForm: FormGroup;
-    private customerID;
+    private carID: number;
 
     private state: ICar = null;
     
@@ -32,6 +32,7 @@ export class CarNewItemComponent implements OnInit {
         private route: ActivatedRoute,
         private formBuilder: FormBuilder
     ){
+        this.carService.car.subscribe(this.carData);
         this.carService.carMakes.subscribe(this.processData);
         this.carService.carModels.subscribe(this.carmodelData);
         this.carService.fuelTypes.subscribe(this.fueltypeData);
@@ -46,34 +47,52 @@ export class CarNewItemComponent implements OnInit {
     private fueltypeData = (data: IFuelType[]) => {
         this.fuelTypes = data;
     }
+    private carData = (data: ICar) => {
+        this.car = data;
+        //console.log(this.car[0]);
+        this.carForm.patchValue(this.car[0]);
+        this.carForm.controls['carMakeID'].setValue(this.car[0].carModel.carMake.carMakeID);
+        this.carService.getCarModelByCarMakeID(this.car[0].carModel.carMake.carMakeID);
+        this.carForm.controls['carModelID'].setValue(this.car[0].carModelID);
+    }
 
     ngOnInit(): void {
+        //Paraméterek lekérése az URL-ből
+        this.carID = this.route.snapshot.params['carID'];
+
+        //Jármű márkák és üzemanyagtípusok lekérése
         this.carService.getAllCarMakes();
         this.carService.getFuelTypes();
-        this.customerID = this.route.snapshot.params['customerID'];
 
-        if (this.customerID > 0) {
-            console.log("van user");
+        //Ha ügyféltől érkezünk, és az autó már létezik, lekérjük az adatait
+        if (this.carID > 0) {
+            console.log("Ügyfél autója szerkesztésre");
+            this.carService.getCarByCarID(this.carID);
         }
 
         //console.log("carmakes from component " + this.carMakes);
         //console.log("car from component " + this.car);
         this.carForm = this.formBuilder.group({
+            "carID": [0],
             "carMakeID": [null, Validators.compose([Validators.required])],
             "carModelID": [null, Validators.compose([Validators.required])],
-            "fuelTypeID": [null, Validators.compose([Validators.required])],
-            "vin": [null, Validators.compose([Validators.required])],
-            "engineNumber": [null, Validators.compose([Validators.required])],
-            "color": [null, Validators.compose([Validators.required])],
-            "customerID": [this.customerID],
-            "licenseplate": [null, Validators.compose([Validators.required])]
+            "fuelTypeID": [null],
+            "vin": [null],
+            "engineNumber": [null],
+            "color": [null],
+            "customerID": [],
+            "licenseplate": [null]
 
         });
     }
 
     SelectedCarMake(carmakeid: number) {
         this.carModels = null;
-        this.carService.getCarModelByCarMakeID(carmakeid);
+        console.log("carID" + this.carID);
+        if (this.carID == 0) {
+            this.carService.getCarModelByCarMakeID(carmakeid);
+        }
+        
     }
 
     SelectedCarModel(carmodelid: number) {
@@ -87,8 +106,21 @@ export class CarNewItemComponent implements OnInit {
     saveCar() {
         this.car = this.carForm.value;
         //console.log("this.car" + this.car.carModelID + " " + this.car.carMakeID + " " + this.car.engineNumber + " " + this.car.color + " " + this.car.vin + " " + this.car.customerID);
-        this.carService.insert(this.car);
-        this.router.navigate(["/viewcustomer/" + this.customerID]);
+        if (this.car.carID === 0) {
+            console.log("insert car");
+            this.carService.insert(this.car);
+        }
+        else {
+            console.log("update car");
+            console.log(this.car);
+            this.carService.update(this.car);
+        }
+        
+        //this.router.navigate(["/viewcustomer/" + this.car.customerID]);
+    }
+
+    back() {
+        this.router.navigate(["/viewcustomer/" + this.car[0].customerID]);
     }
 
 

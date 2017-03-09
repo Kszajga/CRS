@@ -39,4 +39,9 @@ export class CustomerListItemComponent implements OnInit {
         console.log(customer);
         this.router.navigate(["/newcar/" + customer]);
     }
+
+    editCar(carID: number) {
+        console.log("editCar from CustomerListItem");
+        this.router.navigate(["/editcar/"+ carID])
+    }
 }

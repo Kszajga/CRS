@@ -17,6 +17,7 @@
     "angular2-universal-polyfills": "~2.0.10",
     "aspnet-prerendering": "^1.0.6",
     "aspnet-webpack": "^1.0.11",
+    "angular2-toaster": "^1.0.2",
     "bootstrap": "^3.3.7",
     "css": "^2.2.1",
     "css-loader": "^0.25.0",
@@ -24,8 +25,10 @@
     "expose-loader": "^0.7.1",
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.9.0",
+    "font-awesome": "^4.7.0",
     "isomorphic-fetch": "^2.2.1",
     "jquery": "^2.2.1",
+    "ng2-datetime-picker": "0.14.4",
     "preboot": "^4.5.2",
     "raw-loader": "^0.5.1",
     "rxjs": "5.0.0-beta.12",
@@ -38,9 +41,7 @@
     "webpack-externals-plugin": "^1.0.0",
     "webpack-hot-middleware": "^2.10.0",
     "webpack-merge": "^0.14.1",
-    "webpack-externals-plugin": "^1.0.0",
-    "zone.js": "^0.6.21",
-    "font-awesome": "^4.7.0"
+    "zone.js": "^0.6.21"
   },
   "devDependencies": {
     "webpack": "^1.0.1"

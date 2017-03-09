@@ -2,6 +2,7 @@
 import { Http } from '@angular/http';
 import { ActivatedRoute } from '@angular/router';
 import { CarService } from './carService';
+import { ToasterService } from 'angular2-toaster/angular2-toaster';
 
 import ICar = App.Models.ICar;
 
@@ -14,12 +15,14 @@ export class CarListComponent implements OnInit {
     
     constructor(
         private carService: CarService,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        private toaster: ToasterService
     ) {
         this.carService.cars.subscribe(this.processData);
     }
 
     processData = (data: ICar[]) => {
+        this.toaster.pop("success", "Notification", "Sikeres hozzáadás!");
         this.cars = data;
     }
 

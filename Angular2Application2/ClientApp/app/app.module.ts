@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { UniversalModule } from 'angular2-universal';
+import { ToasterModule } from 'angular2-toaster/angular2-toaster';
 
 import { AppComponent } from './components/app/app.component'
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
@@ -37,13 +38,15 @@ import { ReactiveFormsModule } from '@angular/forms';
     ],
     imports: [
         UniversalModule, // Must be first import. This automatically imports BrowserModule, HttpModule, and JsonpModule too.
-        ReactiveFormsModule, 
+        ReactiveFormsModule,
+        ToasterModule,
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
             { path: 'counter', component: CounterComponent },
             { path: 'fetch-data', component: FetchDataComponent },
             { path: 'car', component: CarListComponent },
+            { path: 'editcar/:carID', component: CarNewItemComponent },
             { path: 'car/:customerID', component: CarListItemComponent },
             { path: 'newcar/:customerID', component: CarNewItemComponent },
 

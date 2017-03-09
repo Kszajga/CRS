@@ -39,6 +39,20 @@ namespace Angular2Application2.Controllers
         [HttpGet("[action]")]
         [Route("")]
         [ProducesResponseType(typeof(IEnumerable<Car>), 200)]
+        public async Task<IActionResult> GetCarByCarID(int carID)
+        {
+            var data = await _context.Car
+                .Where(c => c.CarID == carID)
+                .Include(e => e.CarModel)
+                    .ThenInclude(f => f.CarMake)
+                .Include(e => e.FuelType)
+                .ToListAsync();
+            return Ok(data);
+        }
+
+        [HttpGet("[action]")]
+        [Route("")]
+        [ProducesResponseType(typeof(IEnumerable<Car>), 200)]
         public async Task<IActionResult> GetCars()
         {
             var data = await _context.Car
@@ -105,6 +119,27 @@ namespace Angular2Application2.Controllers
                     throw;
                 }
                 
+            }
+            return BadRequest(ModelState);
+        }
+
+        [HttpPut]
+        [Route("")]
+        public async Task<IActionResult> Update([FromBody] Car car)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Update(car);
+                try
+                {
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    return NotFound(car);
+                }
+
+                return new NoContentResult();
             }
             return BadRequest(ModelState);
         }

@@ -1,6 +1,7 @@
 ﻿declare module App.Models {
 
     interface ICar {
+        carID: number;
         carMakeID: number;
         carModelID: number;
         carModelID1: number;

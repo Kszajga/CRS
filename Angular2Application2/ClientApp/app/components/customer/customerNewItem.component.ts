@@ -4,10 +4,13 @@ import { Subscription } from "rxjs/Subscription";
 import { CustomerService } from "./customerService";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { Response } from "@angular/http";
+import { ToasterService } from 'angular2-toaster/angular2-toaster';
+
 import ICustomer = App.Models.ICustomer;
 
 @Component({
     selector: 'customer-new',
+    providers: [ToasterService],
     template: require('./customerNewItem.component.html')
 })
 export class CustomerNewItemComponent implements OnInit {
@@ -17,18 +20,31 @@ export class CustomerNewItemComponent implements OnInit {
     customerForm: FormGroup;
     private state: ICustomer = null;
     private subscription: Subscription;
+    private isLoading: boolean = false;
     
     constructor(
         private router: Router,
         private customerService: CustomerService,
         private route: ActivatedRoute,
-        private formBuilder: FormBuilder
+        private formBuilder: FormBuilder,
+        private toaster: ToasterService
     ) {}
 
     private processData = (data: ICustomer) => {
         this.customer = data;
-        console.log("processData");
+        // Dátum átalakítása, hogy az inputban megjelenhessen
+        if (this.customer[0].birthday) {
+            this.customer[0].birthday = new Date(this.customer[0].birthday).toISOString().substring(0, 10);
+        }
         this.customerForm.patchValue(this.customer[0]);
+
+        if (this.isLoading)
+        {   
+            this.toaster.pop("success", "Info", "Hozzáadás sikeres");
+            console.log("toaster volt");
+        }
+
+        this.isLoading = false;
     }
 
     ngOnInit(): void {
@@ -61,10 +77,11 @@ export class CustomerNewItemComponent implements OnInit {
     }
 
     saveCustomer() {
+        this.isLoading = true;
         this.customer = this.customerForm.value;
-        
         if (this.customer.customerID === 0) {
             console.log("insert");
+            this.toaster.pop("success", "Info", "Hozzáadás sikeres");
             this.customerService.insert(this.customer).subscribe((r: Response) => {
                 console.log("Jump to CustomerID: " + r.json().customerID);
                 this.router.navigate(["/newcar/" + r.json().customerID]);
