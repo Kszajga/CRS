@@ -1,4 +1,4 @@
-﻿import { Component, OnInit } from "@angular/core";
+﻿import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Params, Router, ActivatedRoute } from "@angular/router";
 import { Subscription } from "rxjs/Subscription";
 import { CarService } from "./carService";
@@ -14,32 +14,32 @@ import IFuelType = App.Models.IFuelType;
     template: require('./carNewItem.component.html')
 })
 
-export class CarNewItemComponent implements OnInit {
-    car: ICar = null;
+export class CarNewItemComponent implements OnInit, OnDestroy {
+    private car: ICar = null;
     carMakes: ICarMake[];
     carModels: ICarModel[];
     fuelTypes: IFuelType[];
+
     carForm: FormGroup;
     private carID: number;
 
     private state: ICar = null;
     
-    private subscription: Subscription;
+    private carModelsSubs: Subscription;
+    private carMakesSubs: Subscription;
+    private carFuelTypesSubs: Subscription;
+    private carSubs: Subscription;
 
     constructor(
         private router: Router,
         private carService: CarService,
         private route: ActivatedRoute,
         private formBuilder: FormBuilder
-    ){
-        this.carService.car.subscribe(this.carData);
-        this.carService.carMakes.subscribe(this.processData);
-        this.carService.carModels.subscribe(this.carmodelData);
-        this.carService.fuelTypes.subscribe(this.fueltypeData);
-    }
+    ){}
 
-    private processData = (data: ICarMake[]) => {
+    private carmakeData = (data: ICarMake[]) => {
         this.carMakes = data;
+        console.log("carMakes carmakeData" + this.carMakes);
     }
     private carmodelData = (data: ICarModel[]) => {
         this.carModels = data;
@@ -49,7 +49,7 @@ export class CarNewItemComponent implements OnInit {
     }
     private carData = (data: ICar) => {
         this.car = data;
-        //console.log(this.car[0]);
+        console.log("carData" + this.car[0]);
         this.carForm.patchValue(this.car[0]);
         this.carForm.controls['carMakeID'].setValue(this.car[0].carModel.carMake.carMakeID);
         this.carService.getCarModelByCarMakeID(this.car[0].carModel.carMake.carMakeID);
@@ -59,10 +59,22 @@ export class CarNewItemComponent implements OnInit {
     ngOnInit(): void {
         //Paraméterek lekérése az URL-ből
         this.carID = this.route.snapshot.params['carID'];
+        console.log("carID" + this.carID);
+
+
+        this.carMakesSubs = this.carService.carMakes.subscribe(this.carmakeData);
+        console.log("carMakeSubs" + this.carMakesSubs);
+        this.carModelsSubs = this.carService.carModels.subscribe(this.carmodelData);
+        this.carFuelTypesSubs = this.carService.fuelTypes.subscribe(this.fueltypeData);
+        this.carSubs = this.carService.car.subscribe(this.carData);
+        
+
+
 
         //Jármű márkák és üzemanyagtípusok lekérése
-        this.carService.getAllCarMakes();
-        this.carService.getFuelTypes();
+        //this.carMakesSubs = this.carService.carMakes.subscribe(this.carmakeData);
+        //this.carService.getAllCarMakes();
+        //this.carService.getFuelTypes();
 
         //Ha ügyféltől érkezünk, és az autó már létezik, lekérjük az adatait
         if (this.carID > 0) {
@@ -84,6 +96,10 @@ export class CarNewItemComponent implements OnInit {
             "licenseplate": [null]
 
         });
+    }
+
+    ngOnDestroy(): void {
+        //this.carSubs.unsubscribe();
     }
 
     SelectedCarMake(carmakeid: number) {

@@ -2,7 +2,7 @@
 <div class="panel-group">
     <div class="panel panel-default">
         <div class="panel-heading">
-            <div class="panel-title">
+            <div class="panel-title" *ngFor="let customer of customer">
                 <a data-toggle="collapse" href="#customer">Ügyfél adatai</a>
                 <button type="button" class="btn btn-primary btn-sm" (click)="editCustomer(customer.customerID)">
                     <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>

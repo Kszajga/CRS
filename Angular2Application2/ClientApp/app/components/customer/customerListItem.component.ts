@@ -32,7 +32,7 @@ export class CustomerListItemComponent implements OnInit {
 
     editCustomer(customer: ICustomer) {
         console.log("Listből " + customer);
-        this.router.navigate(["/editcustomer/" + customer]);
+        this.router.navigate(["/editcustomer/" + this.customerID]);
     }
 
     addCar(customer: ICustomer) {
