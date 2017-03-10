@@ -6,7 +6,7 @@
         <div class="col-md-4">
             <div class="form-group">
                 <select #carmakeselected formControlName="carMakeID" (change)="SelectedCarMake(carmakeselected.value)" class="form-control">
-                    <option *ngFor="let carMake of carMakes" [value]="carMake.carMakeID">{{carMake.carMakeName}}</option>
+                    <option *ngFor="let carMake of carMakes" [ngValue]="carMake.carMakeID">{{carMake.carMakeName}}</option>
                 </select>
             </div>
         </div>
