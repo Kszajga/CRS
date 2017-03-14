@@ -4,14 +4,12 @@
         carID: number;
         carMakeID: number;
         carModelID: number;
-        carModelID1: number;
         color: string;
         customerID: number;
         engineNumber: string;
         fuelTypeID: number;
-        FuelTypeID1: number;
         vin: string;
-        licenseplate: string;
+        licensePlate: string;
     }
 
     interface ICarMake {

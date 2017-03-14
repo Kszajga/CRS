@@ -19,7 +19,7 @@ namespace Angular2Application2.Data
 
             var customers = new Customer[]
             {
-                new Customer {Birthday = DateTime.Parse("1990.06.08."), Birthplace = "Kapuvár", Deleted = false, FirstName = "Ádám", LastName = "Horváth", IDNumber = "458068LA", NameOfMother = "Jakab Márta"}
+                new Customer {Birthday = DateTime.Parse("1990.06.08."), PhoneNumber = "06308636059", Address = "Beled city", Birthplace = "Kapuvár", Deleted = false, FirstName = "Ádám", LastName = "Horváth", IDNumber = "458068LA", NameOfMother = "Jakab Márta"}
             };
 
             foreach ( Customer c in customers)

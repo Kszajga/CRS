@@ -1,4 +1,4 @@
-﻿import { Component, OnInit } from '@angular/core';
+﻿import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Params, Router, ActivatedRoute } from "@angular/router";
 import { Subscription } from "rxjs/Subscription";
 import { CustomerService } from "./customerService";
@@ -13,7 +13,7 @@ import ICustomer = App.Models.ICustomer;
     providers: [ToasterService],
     template: require('./customerNewItem.component.html')
 })
-export class CustomerNewItemComponent implements OnInit {
+export class CustomerNewItemComponent implements OnInit, OnDestroy {
     customer: ICustomer = null;
     private customerID: number;
     
@@ -46,7 +46,7 @@ export class CustomerNewItemComponent implements OnInit {
 
         this.isLoading = false;
     }
-
+    
     ngOnInit(): void {
         this.customerID = 0;
         //GET CustomerID
@@ -94,6 +94,7 @@ export class CustomerNewItemComponent implements OnInit {
         } else {
             console.log("update");
             this.customerService.update(this.customer);
+            this.subscription.unsubscribe();
         }
         //this.customerForm.reset();
     }
@@ -105,5 +106,9 @@ export class CustomerNewItemComponent implements OnInit {
         } else {
             this.router.navigate(["customers"]);
         }
+    }
+
+    ngOnDestroy(): void {
+        this.subscription.unsubscribe();
     }
 }

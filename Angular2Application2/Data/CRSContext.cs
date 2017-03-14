@@ -34,7 +34,7 @@ namespace Angular2Application2.Data
             customerTableModel.Property(p => p.CustomerID).UseSqlServerIdentityColumn();
             customerTableModel.Property(p => p.FirstName).IsRequired();
             customerTableModel.Property(p => p.LastName).IsRequired();
-            customerTableModel.Property(p => p.PhoneNumber).IsRequired();
+            //customerTableModel.Property(p => p.PhoneNumber).IsRequired();
             customerTableModel.Property(p => p.RegisterDate).ValueGeneratedOnAdd();
             customerTableModel.Property(p => p.LastModified).HasDefaultValueSql("getutcdate()");
 

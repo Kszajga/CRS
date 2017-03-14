@@ -77,22 +77,23 @@ export class CarService {
         this.http.get("/api/Car/GetCarByCarID?carID=" + carID).subscribe(
             (result: Response) => {
                 this.car.next(result.json());
-                //console.log("car " + result.json()[0].carModel.carModelName);
+                console.log("car " + result.json()[0].licensePlate);
             }, this.handleError);
     }
 
     insert(car: Car): void {
-        console.log("this.car" + car.carModelID + " " + car.carMakeID + " " + car.engineNumber + " " + car.color + " " + car.vin + " " + car.customerID);
+        console.log("insert car service " + car.carModelID + " " + car.carMakeID + " " + car.engineNumber + " " + car.color + " " + car.vin + " " + car.customerID);
         this.http.post("/api/Car/",
             JSON.stringify(car),
             this.defaultArgs)
             .subscribe((result: Response) => {
                 this.car.next(result.json());
+                console.log("car insert " + result.json()[0]);
             }, this.handleError);
     }
 
     update(car: Car): void {
-        console.log("update car" + car);
+        console.log("update car service " + car);
         this.http.put("/api/Car/",
             JSON.stringify(car),
             this.defaultArgs)
@@ -111,10 +112,11 @@ export class CarService {
     }
 
     getCarModelByCarMakeID(CarMakeID: number): void {
+        console.log(CarMakeID);
         this.http.get("/api/Car/GetCarModelByCarMakeID?CarMakeID=" + CarMakeID).subscribe(
             (result: Response) => {
                 this.carModels.next(result.json());
-                //console.log("carModels from service " + result.json()[0].carModelName);
+                //console.log("carModels from service " + result.json()[0]);
             }, this.handleError);
     }
 

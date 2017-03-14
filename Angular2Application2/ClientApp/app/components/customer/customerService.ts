@@ -70,7 +70,7 @@ export class CustomerService {
     }
 
     update(customer: Customer): void {
-        console.log("update customer " + customer);
+        console.log("update customer " + customer.address);
         this.http.put("/api/Customer/",
             JSON.stringify(customer),
             this.defaultArgs)

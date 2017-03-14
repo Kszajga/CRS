@@ -14,6 +14,7 @@ namespace Angular2Application2.Data
         public DateTime? Birthday { get; set; }
         public string Birthplace { get; set; }
         public string PhoneNumber { get; set; }
+        public string Address { get; set; }
 
 
         public DateTime? RegisterDate { get; set; }
