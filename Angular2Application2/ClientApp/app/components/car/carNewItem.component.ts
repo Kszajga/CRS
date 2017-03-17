@@ -58,13 +58,18 @@ export class CarNewItemComponent implements OnInit, OnDestroy {
     }
     private carData = (data: ICar) => {
         this.car = data;
-        console.log("car carData loaded " + this.car[0].carModel.carMake.carMakeID);
+        //console.log("car carData loaded " + this.car[0].carModel.carMake.carMakeID);
 
         //Ha az autó adatai betöltődtek, form feltöltése
-        this.carForm.patchValue(this.car[0]);        
+        if (this.car) {
+            this.carForm.patchValue(this.car[0]);
+        }
+               
         this.carForm.controls["carMakeID"].setValue(this.car[0].carModel.carMake.carMakeID); //Márka beállítása a feltöltött listából
         this.SelectedCarMake(this.car[0].carModel.carMake.carMakeID); //Típusok letöltése a márkához
         this.carForm.controls["carModelID"].setValue(this.car[0].carModel.carModelID); //Típus beállítása márkán belül
+        
+        
     }
 
     ngOnInit(): void {
@@ -141,6 +146,7 @@ export class CarNewItemComponent implements OnInit, OnDestroy {
 
     ngOnDestroy(): void {
         //this.carSubs.unsubscribe();
+        //this.carModelsSubs.unsubscribe();
     }
 
     SelectedCarMake(carmakeid: number) {
@@ -161,17 +167,20 @@ export class CarNewItemComponent implements OnInit, OnDestroy {
 
     saveCar() {        
         this.car = this.carForm.value;
+        
         //console.log("this.car" + this.car.carModelID + " " + this.car.carMakeID + " " + this.car.engineNumber + " " + this.car.color + " " + this.car.vin + " " + this.car.customerID);
         if (this.car.carID === 0) {
             console.log("insert car");
             this.carService.insert(this.car);
+            //this.carSubs.unsubscribe();
         }
         else {
             console.log("update car");
             console.log(this.car);
             this.carService.update(this.car);
+            this.carSubs.unsubscribe();
         }
-        //this.carSubs.unsubscribe();
+        
         if (this.carID) {
             this.router.navigate(["/viewcustomer/" + this.car.customerID]);
         }

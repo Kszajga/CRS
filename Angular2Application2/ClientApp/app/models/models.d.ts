@@ -41,5 +41,14 @@
         FuelTypeName: string;
     }
 
+    interface IServiceIncidence {
+        ServiceIncidenceID: number;
+        ServiceIncidenceNameID: number;
+        ServiceIncidenceName: string;
+        CarID: number;
+        ManHour: number;
+        Mileage: number;
+    }
+
 }
 

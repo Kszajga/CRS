@@ -1,5 +1,23 @@
-﻿<h1>Cars</h1>
-<p>This component demonstrates fetching data from the server.</p>
+﻿<div class="row">
+    <div class="col-md-12">
+        <form [formGroup]="searchForm" class="form-inline" novalidate>
+            <input #lastName type="text" formControlName="lastName" placeholder="Ügyfél vezetékneve" class="form-control" />
+            <input #firstName type="text" formControlName="firstName" placeholder="Ügyfél keresztneve" class="form-control" />
+            <input #licensePlate type="text" formControlName="licensePlate" placeholder="Rendszám" class="form-control" />
+            <select #carmakeselected formControlName="carMakeID" (change)="SelectedCarMake(carmakeselected.value)" class="form-control">
+                <option disabled hidden [value]="undefined">Jármű márka</option>
+                <option *ngFor="let carMake of carMakes" [value]="carMake.carMakeID">{{carMake.carMakeName}}</option>
+            </select>
+
+            <select #carmodelselected formControlName="carModelID" (change)="SelectedCarModel(carmodelselected.value)" class="form-control">
+                <option disabled hidden [value]="undefined">Jármű típus</option>
+                <option *ngFor="let carModel of carModels" [value]="carModel.carModelID">{{carModel.carModelName}}</option>
+            </select>
+
+            <input type="submit" (click)="StartSearch(firstName.value, lastName.value, licensePlate.value, carmakeselected.value, carmodelselected.value)" value="Keresés" class="btn btn-primary" />
+        </form>
+    </div>
+</div>
 <p *ngIf="!cars"><em>Loading...</em></p>
 <table class='table' *ngIf="cars">
     {{ customerID }}

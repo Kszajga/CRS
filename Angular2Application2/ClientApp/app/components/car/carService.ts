@@ -36,7 +36,6 @@ export class CarService {
 
     handleError(error: Response) {
         var message = "";
-
         try {
             var result = JSON.parse(error.text());
 
@@ -62,6 +61,14 @@ export class CarService {
         this.http.get("/api/Car/GetCars").subscribe(
             (result: Response) => {
                 this.cars.next(result.json());
+            }, this.handleError);
+    }
+
+    getCarsForSearch(lastName: string, firstName: string, licensePlate: string, carmakeselected: number, carmodelselected: number): void {
+        this.http.get("/api/Car/GetCarsForSearch?firstName=" + firstName + "&lastName=" + lastName + "&licensePlate=" + licensePlate + "&carmakeselected=" + carmakeselected + "&carmodelselected=" + carmodelselected).subscribe(
+            (result: Response) => {
+                this.cars.next(result.json());
+                //console.log("car " + result.json()[0].carModel.carModelName);
             }, this.handleError);
     }
 
