@@ -82,8 +82,8 @@ export class CustomerNewItemComponent implements OnInit, OnDestroy {
             console.log("insert");
             this.toaster.pop("success", "Info", "Hozzáadás sikeres");
             this.incidenceService.insert(this.incidence).subscribe((r: Response) => {
-                console.log("Jump to CustomerID: " + r.json().customerID);
-                this.router.navigate(["/newcar/" + r.json().customerID]);
+                console.log("Incidens elmentve: " + r.json().carID);
+                //this.router.navigate(["/newcar/" + r.json().customerID]);
             });
 
             //this.subscription = this.customerService.customer.subscribe(this.processData);

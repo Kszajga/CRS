@@ -1,5 +1,6 @@
 ﻿import { Injectable } from "@angular/core";
 import { Subject } from "rxjs/Subject";
+import { Observable } from 'rxjs/Observable';
 //import { Configuration } from "../configuration"; ez lehet, hogy nem kell
 import { Http, Response, RequestOptionsArgs, Headers } from "@angular/http";
 
@@ -8,8 +9,8 @@ import ServiceIncidence = App.Models.IServiceIncidence;
 @Injectable()
 export class IncidenceService {
 
-    private incidences: Subject<ServiceIncidence[]>;//ezekhez lehet, hogy nem kell a private!
-    private incidence: Subject<ServiceIncidence>;
+    incidences: Subject<ServiceIncidence[]>;//ezekhez lehet, hogy nem kell a private!
+    incidence: Subject<ServiceIncidence>;
     
     private defaultArgs: RequestOptionsArgs;
     //private configuration: Configuration, 
@@ -38,15 +39,11 @@ export class IncidenceService {
             }, this.handleError);
     }
 
-    insert(incidence: ServiceIncidence): void {
+    insert(incidence: ServiceIncidence): Observable<Response> {
         //console.log("insert car service " + car.carModelID + " " + car.carMakeID + " " + car.engineNumber + " " + car.color + " " + car.vin + " " + car.customerID);
         this.http.post("/api/ServiceIncidence/",
             JSON.stringify(incidence),
-            this.defaultArgs)
-            .subscribe((result: Response) => {
-                this.incidence.next(result.json());
-                console.log("incidence inserted " + result.json()[0]);
-            }, this.handleError);
+            this.defaultArgs);
     }
 
     update(incidence: ServiceIncidence): void {
