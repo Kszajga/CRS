@@ -42,7 +42,7 @@
                     <a data-toggle="collapse" href="#cars">Ügyfél járművei</a>
                 </span>
                 <button type="button" class="btn btn-primary btn-sm" (click)="addCar(customer.customerID)">
-                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>{{customer.customerID}}
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Új jármű
                 </button>
             </div>
             <div id="cars" class="panel-collapse collapse in" aria-expanded="true">
@@ -55,10 +55,15 @@
                                 <div class="panel-heading">
                                     <h4 class="panel-title">
                                         <a data-toggle="collapse" href="#car{{car.carID}}">{{car.carModel.carMake.carMakeName}} {{car.carModel.carModelName}}</a>
+                                        <!--Link a szerkesztéshez-->
                                         <button type="button" class="btn btn-primary btn-sm" (click)="editCar(car.carID)">
                                             <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                                         </button>
-                                        
+                                        <!--Link az új szervizeseményhez-->
+                                        <button type="button" class="btn btn-primary btn-sm" (click)="addNewIncident(car.carID)">
+                                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Új szervizesemény
+                                        </button>
+
                                     </h4>
                                 </div>
                                 <div id="car{{car.carID}}" class="panel-collapse collapse" aria-expanded="true">

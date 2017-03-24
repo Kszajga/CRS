@@ -6,8 +6,6 @@ import { ToasterModule } from 'angular2-toaster/angular2-toaster';
 import { AppComponent } from './components/app/app.component'
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { HomeComponent } from './components/home/home.component';
-import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
-import { CounterComponent } from './components/counter/counter.component';
 
 import { CarListComponent } from './components/car/carList.component';
 import { CarListItemComponent } from './components/car/carListItem.component';
@@ -19,6 +17,9 @@ import { CustomerListItemComponent } from './components/customer/customerListIte
 import { CustomerNewItemComponent } from './components/customer/customerNewItem.component';
 import { CustomerService } from './components/customer/customerService';
 
+import { IncidenceNewItemComponent } from './components/serviceincidence/incidenceNewItem.component';
+import { IncidenceService } from './components/serviceincidence/incidenceService';
+
 import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
@@ -26,14 +27,13 @@ import { ReactiveFormsModule } from '@angular/forms';
     declarations: [
         AppComponent,
         NavMenuComponent,
-        CounterComponent,
-        FetchDataComponent,
         CarListComponent,
         CarListItemComponent,
         CarNewItemComponent,
         CustomerListComponent,
         CustomerListItemComponent,
         CustomerNewItemComponent,
+        IncidenceNewItemComponent,
         HomeComponent
     ],
     imports: [
@@ -43,8 +43,6 @@ import { ReactiveFormsModule } from '@angular/forms';
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
-            { path: 'counter', component: CounterComponent },
-            { path: 'fetch-data', component: FetchDataComponent },
             { path: 'car', component: CarListComponent },
             { path: 'editcar/:carID', component: CarNewItemComponent },
             { path: 'car/:customerID', component: CarListItemComponent },
@@ -54,10 +52,12 @@ import { ReactiveFormsModule } from '@angular/forms';
             { path: 'editcustomer/:customerID', component: CustomerNewItemComponent },
             { path: 'viewcustomer/:customerID', component: CustomerListItemComponent },
             { path: 'newcustomer', component: CustomerNewItemComponent },
+
+            { path: 'newincidence/:carID', component: IncidenceNewItemComponent },
             { path: '**', redirectTo: 'home' }            
         ])
     ],
-    providers: [CarService, CustomerService]
+    providers: [CarService, CustomerService, IncidenceService]
 })
 
 export class AppModule {

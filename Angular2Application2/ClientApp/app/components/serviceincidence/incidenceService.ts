@@ -26,7 +26,7 @@ export class IncidenceService {
     getIncidencesByCarID (carID: number): void {
         this.http.get("/api/ServiceIncidence/GetIncidencesByCarID?carID=" + carID).subscribe(
             (result: Response) => {
-                this.incidences.next(result.json());
+                this.incidence.next(result.json());
                 //console.log("car " + result.json()[0].carModel.carModelName);
             }, this.handleError);
     }
@@ -41,9 +41,7 @@ export class IncidenceService {
 
     insert(incidence: ServiceIncidence): Observable<Response> {
         //console.log("insert car service " + car.carModelID + " " + car.carMakeID + " " + car.engineNumber + " " + car.color + " " + car.vin + " " + car.customerID);
-        this.http.post("/api/ServiceIncidence/",
-            JSON.stringify(incidence),
-            this.defaultArgs);
+        return this.http.post("/api/ServiceIncidence/", JSON.stringify(incidence), this.defaultArgs);
     }
 
     update(incidence: ServiceIncidence): void {

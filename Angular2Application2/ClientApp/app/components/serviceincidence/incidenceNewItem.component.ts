@@ -13,8 +13,9 @@ import IServiceIncidence = App.Models.IServiceIncidence;
     providers: [ToasterService],
     template: require('./incidenceNewItem.component.html')
 })
-export class CustomerNewItemComponent implements OnInit, OnDestroy {
+export class IncidenceNewItemComponent implements OnInit, OnDestroy {
     incidence: IServiceIncidence = null;
+    incidences: IServiceIncidence[];
     private carID: number;
 
     incidenceForm: FormGroup;
@@ -30,7 +31,8 @@ export class CustomerNewItemComponent implements OnInit, OnDestroy {
         private toaster: ToasterService
     ) { }
 
-    private processData = (data: IServiceIncidence) => {
+    private incidenceData = (data: IServiceIncidence) => {
+        console.log("incidenceData start");
         this.incidence = data;
         // Dátum átalakítása, hogy az inputban megjelenhessen
         //if (this.incidence[0].birthday) {
@@ -44,6 +46,7 @@ export class CustomerNewItemComponent implements OnInit, OnDestroy {
         }
 
         this.isLoading = false;
+        console.log("incidenceData end");
     }
 
     ngOnInit(): void {
@@ -53,25 +56,20 @@ export class CustomerNewItemComponent implements OnInit, OnDestroy {
 
         if (this.carID > 0) {
             console.log("customerID > 0");
-            //this.customerService.getCustomerById(this.carID);
+            this.incidenceService.getIncidencesByCarID(this.carID);
+            this.subscription = this.incidenceService.incidence.subscribe(this.incidenceData);
         }
-        else {
-        }
+        else {}
 
-        this.subscription = this.incidenceService.incidence.subscribe(this.processData);
+        
 
         this.incidenceForm = this.formBuilder.group({
-            "customerID": [0],
-            "lastName": [null, Validators.compose([Validators.required])],
-            "firstName": [null, Validators.compose([Validators.required])],
-            "birthplace": [""],
-            "birthday": [""],
-            "address": [""],
-            "idNumber": [""],
-            "phoneNumber": [null, Validators.compose([Validators.required])],
-            "nameOfMother": [""],
-            "registerDate": [new Date()],
-            "lastModified": [new Date()]
+            "ServiceIncidenceID": [""],
+            "ServiceIncidenceNameID": [""],
+            "ServiceIncidenceName": [""],
+            "CarID": [""],
+            "ManHour": [""],
+            "Mileage": [""]
         });
     }
 
