@@ -1,11 +1,11 @@
 ﻿<toaster-container></toaster-container>
-<form [formGroup]="incidenceForm" class="well form-horizontal" novalidate>
+<form [formGroup]="incidenceForm" class="form-horizontal" novalidate>
 
     <div class="row">
         <div class="form-group">
             <div class="col-xs-12 col-sm-6 col-lg-4">
                 <label for="LastName">Vezetéknév</label>
-                <input type="text" name="LastName" id="LastName" placeholder="Vezetéknév" class="form-control" disabled />
+                <input type="text" name="LastName" id="LastName" placeholder="Vezetéknév" class="form-control" readonly />
             </div>
 
             <div class="col-xs-12 col-sm-6 col-lg-4">
@@ -33,14 +33,48 @@
         <div class="form-group">
             <div class="col-xs-12 col-sm-6 col-lg-4">
                 <label for="IncidenceName">Esemény megnevezése</label>
-                <input type="text" name="IncidenceName" id="IncidenceName" placeholder="Esemény megnevezése" class="form-control" />
+                <input type="text" name="IncidenceName" id="IncidenceName" formControlName="ServiceIncidenceName" placeholder="Esemény megnevezése" class="form-control" />
             </div>
 
             <div class="col-xs-12 col-sm-6 col-lg-4">
                 <label for="IncidenceDate">Esemény időpontja</label>
-                <input type="date" name="IncidenceDate" id="IncidenceDate" placeholder="Esemény időpontja" class="form-control" />
+                <input type="date" name="IncidenceDate" id="IncidenceDate" formControlName="repairDate" class="form-control" />
             </div>
         </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group">
+            <div class="col-xs-12 col-sm-6 col-lg-4">
+                <label for="ManHour">Eltöltött munkaóra</label>
+                <input type="text" name="ManHour" id="ManHour" formControlName="ManHour" placeholder="Munkaórák" class="form-control" />
+            </div>
+
+            <div class="col-xs-12 col-sm-6 col-lg-4">
+                <label for="Mileage">Kilóméterállás</label>
+                <input type="text" name="Mileage" id="Mileage" formControlName="Mileage" class="form-control" />
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th class="col-sm-9">Alkatrész neve</th>
+                    <th class="col-sm-2">Ára</th>
+                    <th class="col-sm-1">
+                        <button class="btn btn-success"><span class="glyphicon glyphicon-plus">Hozzáad</span></button>
+                    </th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let i of incidence">
+                <tr *ngFor="let carpart of i.serviceIncidenceCarPart">
+                    <td>{{carpart.carPart.carPartName}}</td>
+                    <td colspan="2">{{carpart.carPart.price}}</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 
     <!--<div class="form-group" [ngClass]="{'has-error':!incidenceForm.controls['lastName'].valid}">

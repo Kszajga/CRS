@@ -26,13 +26,13 @@ export class IncidenceService {
     getIncidencesByCarID (carID: number): void {
         this.http.get("/api/ServiceIncidence/GetIncidencesByCarID?carID=" + carID).subscribe(
             (result: Response) => {
-                this.incidence.next(result.json());
+                this.incidences.next(result.json());
                 //console.log("car " + result.json()[0].carModel.carModelName);
             }, this.handleError);
     }
 
     getIncidenceByIncidenceID(incidenceID: number): void {
-        this.http.get("/api/Car/ServiceIncidence/GetIncidenceByIncidenceID?incidenceID=" + incidenceID).subscribe(
+        this.http.get("/api/ServiceIncidence/GetIncidenceByIncidenceID?incidenceID=" + incidenceID).subscribe(
             (result: Response) => {
                 this.incidence.next(result.json());
                 //console.log("incidence " + result.json()[0]);

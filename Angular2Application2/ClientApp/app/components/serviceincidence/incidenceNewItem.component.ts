@@ -17,6 +17,7 @@ export class IncidenceNewItemComponent implements OnInit, OnDestroy {
     incidence: IServiceIncidence = null;
     incidences: IServiceIncidence[];
     private carID: number;
+    private incidenceID: number;
 
     incidenceForm: FormGroup;
     private state: IServiceIncidence = null;
@@ -34,16 +35,26 @@ export class IncidenceNewItemComponent implements OnInit, OnDestroy {
     private incidenceData = (data: IServiceIncidence) => {
         console.log("incidenceData start");
         this.incidence = data;
-        // Dátum átalakítása, hogy az inputban megjelenhessen
-        //if (this.incidence[0].birthday) {
-        //    this.incidence[0].birthday = new Date(this.incidence[0].birthday).toISOString().substring(0, 10);
-        //}
-        this.incidenceForm.patchValue(this.incidence[0]);
-
-        if (this.isLoading) {
-            this.toaster.pop("success", "Info", "Hozzáadás sikeres");
-            console.log("toaster volt");
+        if (this.incidenceID > 0) {
+             //Dátum átalakítása, hogy az inputban megjelenhessen
+            if (this.incidence[0].repairDate) {
+                this.incidence[0].repairDate = new Date(this.incidence[0].repairDate).toISOString().substring(0, 10);
+            }
         }
+        console.log(this.incidence);
+        this.incidenceForm.patchValue(this.incidence[0]);
+        this.incidenceForm.setValue({
+            repairDate: this.incidence[0].repairDate,
+            ServiceIncidenceName: this.incidence[0].serviceIncidenceName.incidenceName,
+            CarID: this.incidence[0].carID,
+            ManHour: this.incidence[0].manHour,
+            Mileage: this.incidence[0].mileage
+        });
+
+        //if (this.isLoading) {
+        //    this.toaster.pop("success", "Info", "Hozzáadás sikeres");
+        //    console.log("toaster volt");
+        //}
 
         this.isLoading = false;
         console.log("incidenceData end");
@@ -53,7 +64,16 @@ export class IncidenceNewItemComponent implements OnInit, OnDestroy {
         this.carID = 0;
         //GET CustomerID
         this.carID = this.route.snapshot.params['carID'];
+        this.incidenceID = this.route.snapshot.params['incidenceID'];
+        //console.log(this.router.url.substring(1,14) == "viewincidence");
 
+        if (this.router.url.substring(1, 14) == "viewincidence") {
+            console.log(this.incidenceID);
+            this.incidenceService.getIncidenceByIncidenceID(this.incidenceID);
+            this.subscription = this.incidenceService.incidence.subscribe(this.incidenceData);
+        }
+
+        console.log(this.carID);
         if (this.carID > 0) {
             console.log("customerID > 0");
             this.incidenceService.getIncidencesByCarID(this.carID);
@@ -64,8 +84,9 @@ export class IncidenceNewItemComponent implements OnInit, OnDestroy {
         
 
         this.incidenceForm = this.formBuilder.group({
-            "ServiceIncidenceID": [""],
-            "ServiceIncidenceNameID": [""],
+            "repairDate": [""],
+            //"ServiceIncidenceID": [""],
+            //"ServiceIncidenceNameID": [""],
             "ServiceIncidenceName": [""],
             "CarID": [""],
             "ManHour": [""],

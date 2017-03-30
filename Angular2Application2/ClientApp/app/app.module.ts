@@ -54,6 +54,7 @@ import { ReactiveFormsModule } from '@angular/forms';
             { path: 'newcustomer', component: CustomerNewItemComponent },
 
             { path: 'newincidence/:carID', component: IncidenceNewItemComponent },
+            { path: 'viewincidence/:incidenceID', component: IncidenceNewItemComponent },
             { path: '**', redirectTo: 'home' }            
         ])
     ],

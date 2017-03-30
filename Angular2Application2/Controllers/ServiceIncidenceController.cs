@@ -41,6 +41,7 @@ namespace Angular2Application2.Controllers
             var data = await _context.ServiceIncidence
                     .Include(s => s.ServiceIncidenceName)
                     .Include(s => s.ServiceIncidenceCarPart)
+                        .ThenInclude(s => s.CarPart)
                     .Where(s => s.ServiceIncidenceID == incidenceID)
                 .ToListAsync();
             return Ok(data);
