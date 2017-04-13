@@ -120,19 +120,19 @@ namespace Angular2Application2.Migrations
                     b.Property<string>("IDNumber");
 
                     b.Property<DateTime?>("LastModified")
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValueSql("getutcdate()");
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasDefaultValueSql("GetUtcDate()");
 
                     b.Property<string>("LastName")
                         .IsRequired();
 
                     b.Property<string>("NameOfMother");
 
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired();
+                    b.Property<string>("PhoneNumber");
 
                     b.Property<DateTime?>("RegisterDate")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("GetUtcDate()");
 
                     b.HasKey("CustomerID");
 

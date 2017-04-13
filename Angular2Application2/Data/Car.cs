@@ -23,6 +23,6 @@ namespace Angular2Application2.Data
         public Customer Customer { get; set; }
 
         
-        public ICollection<ServiceIncidence> ServiceIncidences { get; set; }
+        public List<ServiceIncidence> ServiceIncidences { get; set; }
     }
 }

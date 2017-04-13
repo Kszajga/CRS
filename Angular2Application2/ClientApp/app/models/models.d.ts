@@ -32,7 +32,7 @@
         idNubmer: string;
         phoneNumber: string;
         nameOfMother: string;
-        RegisterDate: Date;
+        //RegisterDate: Date;
         LastModified: Date;
     }
 
