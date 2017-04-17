@@ -2,7 +2,7 @@
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { Subscription } from "rxjs/Subscription";
 import { Http } from '@angular/http';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CarService } from './carService';
 //import { ToasterService } from 'angular2-toaster/angular2-toaster';
 
@@ -27,6 +27,7 @@ export class CarListComponent implements OnInit {
     constructor(
         private carService: CarService,
         private route: ActivatedRoute,
+        private router: Router,
         private formBuilder: FormBuilder
         //private toaster: ToasterService
     ) {
@@ -75,5 +76,9 @@ export class CarListComponent implements OnInit {
 
     SelectedCarModel(carmodelid: number) {
         console.log(carmodelid);
+    }
+
+    ViewCar(carID: number) {
+        this.router.navigate(["/editcar/" + carID]);
     }
 }

@@ -19,22 +19,21 @@
     </div>
 </div>
 <p *ngIf="!cars"><em>Loading...</em></p>
-<table class='table' *ngIf="cars">
-    {{ customerID }}
+<table class="table table-bordered" *ngIf="cars">
     <thead>
         <tr>
-            <th>VIN</th>
-            <th>CarMake</th>
-            <th>CarModel</th>
-            <th>ServiceIncidences</th>
+            <th>Ügyfél neve</th>
+            <th>Jármű márka, típus</th>
+            <th>Rendszám</th>
+            <!--<th>ServiceIncidences</th>-->
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let car of cars">
-            <td>{{ car.vin }}</td>
-            <td>{{ car.carModel.carMake.carMakeName }}</td>
-            <td>{{ car.carModel.carModelName }}</td>
-            <td>
+        <tr *ngFor="let car of cars" (click)="ViewCar(car.carID)">
+            <td>{{ car.customer.lastName }} {{ car.customer.firstName}}</td>
+            <td>{{ car.carModel.carMake.carMakeName }} {{ car.carModel.carModelName }}</td>
+            <td>{{ car.licensePlate}}</td>
+            <!--<td>
                 <ul>
                     <li *ngFor="let si of car.serviceIncidences">
                         {{ si.serviceIncidenceName.incidenceName }} {{ si.repairDate | date:'yyyy. MM. dd.'}}
@@ -43,7 +42,7 @@
                         </ul>
                     </li>
                 </ul>
-            </td>
+            </td>-->
         </tr>
     </tbody>
 </table>
