@@ -1,7 +1,7 @@
 ﻿import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Params, Router, ActivatedRoute } from "@angular/router";
 import { Subscription } from "rxjs/Subscription";
-import { CarService } from "./carService";
+import { CarService } from "./car.service";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 
 import ICar = App.Models.ICar;

@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using Angular2Application2.Data;
+using CRS.Data;
 
-namespace Angular2Application2.Migrations
+namespace CRS.Migrations
 {
     [DbContext(typeof(CRSContext))]
     [Migration("20170301170621_datetime nullable")]
@@ -17,7 +17,7 @@ namespace Angular2Application2.Migrations
                 .HasAnnotation("ProductVersion", "1.1.0-rtm-22752")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Angular2Application2.Data.Car", b =>
+            modelBuilder.Entity("CRS.Data.Car", b =>
                 {
                     b.Property<int>("CarID")
                         .ValueGeneratedOnAdd()
@@ -57,7 +57,7 @@ namespace Angular2Application2.Migrations
                     b.ToTable("Car");
                 });
 
-            modelBuilder.Entity("Angular2Application2.Data.CarMake", b =>
+            modelBuilder.Entity("CRS.Data.CarMake", b =>
                 {
                     b.Property<int>("CarMakeID")
                         .ValueGeneratedOnAdd()
@@ -70,7 +70,7 @@ namespace Angular2Application2.Migrations
                     b.ToTable("CarMake");
                 });
 
-            modelBuilder.Entity("Angular2Application2.Data.CarModel", b =>
+            modelBuilder.Entity("CRS.Data.CarModel", b =>
                 {
                     b.Property<int>("CarModelID")
                         .ValueGeneratedOnAdd()
@@ -87,7 +87,7 @@ namespace Angular2Application2.Migrations
                     b.ToTable("CarModel");
                 });
 
-            modelBuilder.Entity("Angular2Application2.Data.CarPart", b =>
+            modelBuilder.Entity("CRS.Data.CarPart", b =>
                 {
                     b.Property<int>("CarPartID")
                         .ValueGeneratedOnAdd();
@@ -101,7 +101,7 @@ namespace Angular2Application2.Migrations
                     b.ToTable("CarPart");
                 });
 
-            modelBuilder.Entity("Angular2Application2.Data.Customer", b =>
+            modelBuilder.Entity("CRS.Data.Customer", b =>
                 {
                     b.Property<int>("CustomerID")
                         .ValueGeneratedOnAdd()
@@ -135,7 +135,7 @@ namespace Angular2Application2.Migrations
                     b.ToTable("Customer");
                 });
 
-            modelBuilder.Entity("Angular2Application2.Data.FuelType", b =>
+            modelBuilder.Entity("CRS.Data.FuelType", b =>
                 {
                     b.Property<int>("FuelTypeID")
                         .ValueGeneratedOnAdd()
@@ -148,7 +148,7 @@ namespace Angular2Application2.Migrations
                     b.ToTable("FuelType");
                 });
 
-            modelBuilder.Entity("Angular2Application2.Data.ServiceIncidence", b =>
+            modelBuilder.Entity("CRS.Data.ServiceIncidence", b =>
                 {
                     b.Property<int>("ServiceIncidenceID")
                         .ValueGeneratedOnAdd()
@@ -173,7 +173,7 @@ namespace Angular2Application2.Migrations
                     b.ToTable("ServiceIncidence");
                 });
 
-            modelBuilder.Entity("Angular2Application2.Data.ServiceIncidenceCarPart", b =>
+            modelBuilder.Entity("CRS.Data.ServiceIncidenceCarPart", b =>
                 {
                     b.Property<int>("CarPartID");
 
@@ -186,7 +186,7 @@ namespace Angular2Application2.Migrations
                     b.ToTable("ServiceIncidenceCarPart");
                 });
 
-            modelBuilder.Entity("Angular2Application2.Data.ServiceIncidenceName", b =>
+            modelBuilder.Entity("CRS.Data.ServiceIncidenceName", b =>
                 {
                     b.Property<int>("ServiceIncidenceNameID")
                         .ValueGeneratedOnAdd()
@@ -199,61 +199,61 @@ namespace Angular2Application2.Migrations
                     b.ToTable("ServiceIncidenceName");
                 });
 
-            modelBuilder.Entity("Angular2Application2.Data.Car", b =>
+            modelBuilder.Entity("CRS.Data.Car", b =>
                 {
-                    b.HasOne("Angular2Application2.Data.CarModel", "CarModel")
+                    b.HasOne("CRS.Data.CarModel", "CarModel")
                         .WithMany()
                         .HasForeignKey("CarModelID")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Angular2Application2.Data.CarModel")
+                    b.HasOne("CRS.Data.CarModel")
                         .WithMany("Cars")
                         .HasForeignKey("CarModelID1");
 
-                    b.HasOne("Angular2Application2.Data.Customer", "Customer")
+                    b.HasOne("CRS.Data.Customer", "Customer")
                         .WithMany("Cars")
                         .HasForeignKey("CustomerID")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Angular2Application2.Data.FuelType", "FuelType")
+                    b.HasOne("CRS.Data.FuelType", "FuelType")
                         .WithMany()
                         .HasForeignKey("FuelTypeID")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Angular2Application2.Data.FuelType")
+                    b.HasOne("CRS.Data.FuelType")
                         .WithMany("Cars")
                         .HasForeignKey("FuelTypeID1");
                 });
 
-            modelBuilder.Entity("Angular2Application2.Data.CarModel", b =>
+            modelBuilder.Entity("CRS.Data.CarModel", b =>
                 {
-                    b.HasOne("Angular2Application2.Data.CarMake", "CarMake")
+                    b.HasOne("CRS.Data.CarMake", "CarMake")
                         .WithMany("CarModel")
                         .HasForeignKey("CarMakeID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Angular2Application2.Data.ServiceIncidence", b =>
+            modelBuilder.Entity("CRS.Data.ServiceIncidence", b =>
                 {
-                    b.HasOne("Angular2Application2.Data.Car", "Car")
+                    b.HasOne("CRS.Data.Car", "Car")
                         .WithMany("ServiceIncidences")
                         .HasForeignKey("CarID")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Angular2Application2.Data.ServiceIncidenceName", "ServiceIncidenceName")
+                    b.HasOne("CRS.Data.ServiceIncidenceName", "ServiceIncidenceName")
                         .WithMany("ServiceIncidences")
                         .HasForeignKey("ServiceIncidenceNameID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Angular2Application2.Data.ServiceIncidenceCarPart", b =>
+            modelBuilder.Entity("CRS.Data.ServiceIncidenceCarPart", b =>
                 {
-                    b.HasOne("Angular2Application2.Data.CarPart", "CarPart")
+                    b.HasOne("CRS.Data.CarPart", "CarPart")
                         .WithMany("ServiceIncidenceCarPart")
                         .HasForeignKey("CarPartID")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Angular2Application2.Data.ServiceIncidence", "ServiceIncidence")
+                    b.HasOne("CRS.Data.ServiceIncidence", "ServiceIncidence")
                         .WithMany("ServiceIncidenceCarPart")
                         .HasForeignKey("ServiceIncidenceID")
                         .OnDelete(DeleteBehavior.Cascade);

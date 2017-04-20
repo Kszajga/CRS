@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Angular2Application2.Data
+namespace CRS.Data
 {
     public class ServiceIncidenceCarPart
     {

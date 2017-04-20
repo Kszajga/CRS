@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { Subscription } from "rxjs/Subscription";
 import { Http } from '@angular/http';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CarService } from './carService';
+import { CarService } from './car.service';
 //import { ToasterService } from 'angular2-toaster/angular2-toaster';
 
 import ICar = App.Models.ICar;
@@ -15,6 +15,7 @@ import ICarModel = App.Models.ICarModel;
     template: require('./carList.component.html')
 })
 export class CarListComponent implements OnInit {
+    private submitted: boolean;
     private cars: ICar[];
     private searchForm: FormGroup;
 
@@ -32,6 +33,7 @@ export class CarListComponent implements OnInit {
         //private toaster: ToasterService
     ) {
         this.carService.cars.subscribe(this.processData);
+        this.submitted = false;
     }
 
     processData = (data: ICar[]) => {
@@ -63,8 +65,10 @@ export class CarListComponent implements OnInit {
     }
 
     private StartSearch(firstName, lastName, licensePlate, carmakeselected, carmodelselected) {
+        this.submitted = true;
         console.log(lastName, firstName, licensePlate, carmakeselected, carmodelselected);
         this.carService.getCarsForSearch(lastName, firstName, licensePlate, carmakeselected, carmodelselected);
+        this.submitted = false;
     }
 
     SelectedCarMake(carmakeid: number) {

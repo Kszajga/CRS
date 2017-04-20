@@ -8,7 +8,7 @@
   <Import Project="$(VSToolsPath)\DotNet\Microsoft.DotNet.Props" Condition="'$(VSToolsPath)' != ''" />
   <PropertyGroup Label="Globals">
     <ProjectGuid>36f6f0fa-31ed-4c13-8296-224313cf194e</ProjectGuid>
-    <RootNamespace>Angular2Application2</RootNamespace>
+    <RootNamespace>CRS</RootNamespace>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup>

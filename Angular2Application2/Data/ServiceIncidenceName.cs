@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Angular2Application2.Data
+namespace CRS.Data
 {
     public class ServiceIncidenceName
     {

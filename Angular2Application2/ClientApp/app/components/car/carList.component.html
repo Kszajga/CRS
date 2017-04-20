@@ -1,4 +1,4 @@
-﻿<div class="row">
+﻿<div class="row margin-top-05">
     <div class="col-md-12">
         <form [formGroup]="searchForm" class="form-inline" novalidate>
             <input #lastName type="text" formControlName="lastName" placeholder="Ügyfél vezetékneve" class="form-control" />
@@ -18,8 +18,9 @@
         </form>
     </div>
 </div>
-<p *ngIf="!cars"><em>Loading...</em></p>
-<table class="table table-bordered" *ngIf="cars">
+<p *ngIf="!cars && submitted"><em>Loading...</em></p>
+
+<table class="table table-bordered margin-top-10" *ngIf="cars">
     <thead>
         <tr>
             <th>Ügyfél neve</th>

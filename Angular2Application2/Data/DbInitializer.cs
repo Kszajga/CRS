@@ -4,13 +4,17 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
-namespace Angular2Application2.Data
+namespace CRS.Data
 {
     public static class DbInitializer
     {
         public static void Initialize(CRSContext context)
         {
-            context.Database.EnsureCreated();
+            if (!context.Database.EnsureCreated())
+            {
+                context.Database.Migrate();
+            }
+            
 
             if (context.ServiceIncidenceCarPart.Any())
             {
@@ -118,12 +122,6 @@ namespace Angular2Application2.Data
                 context.ServiceIncidenceCarPart.Add(c);
             }
             context.SaveChanges();
-
-                        
-
-            
-
-            
         }
     }
 }

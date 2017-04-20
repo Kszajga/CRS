@@ -9,12 +9,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Angular2Application2.Data;
+using CRS.Data;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel;
 using static Microsoft.AspNetCore.Hosting.Internal.HostingApplication;
 
-namespace Angular2Application2
+namespace CRS
 {
     public class Startup
     {
@@ -37,16 +37,14 @@ namespace Angular2Application2
             services.AddMvc()
                 .AddJsonOptions(
                     options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
-                ); ;
+                );
 
             // Add SQL services
             services.AddEntityFramework()
                 .AddDbContext<CRSContext>(config =>
                 {
                     config.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]);
-                });
-
-            
+                });       
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -80,7 +78,7 @@ namespace Angular2Application2
                     defaults: new { controller = "Home", action = "Index" });
             });
 
-            //DbContextSeedData.Seed(app);
+            //Upload default data to database
             DbInitializer.Initialize(app.ApplicationServices.GetRequiredService<CRSContext>());
         }
     }

@@ -1,7 +1,7 @@
 ﻿import { NgModule, Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 import { ActivatedRoute } from '@angular/router';
-import { CarService } from './carService';
+import { CarService } from './car.service';
 
 import ICar = App.Models.ICar;
 

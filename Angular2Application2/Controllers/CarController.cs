@@ -2,13 +2,13 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Angular2Application2.Data;
+using CRS.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace Angular2Application2.Controllers
+namespace CRS.Controllers
 {
     [Route("api/[controller]")]
     public class CarController : Controller

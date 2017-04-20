@@ -1,7 +1,7 @@
 ﻿import { NgModule, Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CustomerService } from './customerService';
+import { CustomerService } from './customer.service';
 
 import ICustomer = App.Models.ICustomer;
 

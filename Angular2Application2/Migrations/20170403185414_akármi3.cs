@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Angular2Application2.Migrations
+namespace CRS.Migrations
 {
     public partial class akármi3 : Migration
     {

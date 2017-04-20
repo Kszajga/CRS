@@ -10,12 +10,12 @@ import { HomeComponent } from './components/home/home.component';
 import { CarListComponent } from './components/car/carList.component';
 import { CarListItemComponent } from './components/car/carListItem.component';
 import { CarNewItemComponent } from "./components/car/carNewItem.component";
-import { CarService } from './components/car/carService';
+import { CarService } from './components/car/car.service';
 
 import { CustomerListComponent } from './components/customer/customerList.component';
 import { CustomerListItemComponent } from './components/customer/customerListItem.component';
 import { CustomerNewItemComponent } from './components/customer/customerNewItem.component';
-import { CustomerService } from './components/customer/customerService';
+import { CustomerService } from './components/customer/customer.service';
 
 import { IncidenceNewItemComponent } from './components/serviceincidence/incidenceNewItem.component';
 import { IncidenceService } from './components/serviceincidence/incidenceService';

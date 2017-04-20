@@ -4,7 +4,7 @@ import { BrowserModule } from "@angular/platform-browser";
 //import { ContactActivator } from "./contactActivator";
 import { CarListItemComponent } from "./carListItem.component";
 //import { ContactEdit } from "./contactEdit";
-import { CarService } from "./carService";
+import { CarService } from "./car.service";
 import { CarRouting } from "./carRoutes";
 import { Car } from "./cars";
 import { Configuration } from "../../configuration";

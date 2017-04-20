@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Angular2Application2.Data
+namespace CRS.Data
 {
     public class FuelType
     {

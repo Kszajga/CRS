@@ -74,6 +74,6 @@
   },
 
   "tooling": {
-    "defaultNamespace": "Angular2Application2"
+    "defaultNamespace": "CRS"
   }
 }

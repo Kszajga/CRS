@@ -1,7 +1,7 @@
 ﻿import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Params, Router, ActivatedRoute } from "@angular/router";
 import { Subscription } from "rxjs/Subscription";
-import { CustomerService } from "./customerService";
+import { CustomerService } from "./customer.service";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { Response } from "@angular/http";
 import { ToasterService } from 'angular2-toaster/angular2-toaster';

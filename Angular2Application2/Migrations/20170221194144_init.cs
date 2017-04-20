@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace Angular2Application2.Migrations
+namespace CRS.Migrations
 {
     public partial class init : Migration
     {
