@@ -20,6 +20,8 @@ import { CustomerService } from './components/customer/customer.service';
 import { IncidenceNewItemComponent } from './components/serviceincidence/incidenceNewItem.component';
 import { IncidenceService } from './components/serviceincidence/incidenceService';
 
+import { OnlyNumber } from './directives/onlynumber.directive';
+
 import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
@@ -34,7 +36,8 @@ import { ReactiveFormsModule } from '@angular/forms';
         CustomerListItemComponent,
         CustomerNewItemComponent,
         IncidenceNewItemComponent,
-        HomeComponent
+        HomeComponent,
+        OnlyNumber
     ],
     imports: [
         UniversalModule, // Must be first import. This automatically imports BrowserModule, HttpModule, and JsonpModule too.
@@ -43,9 +46,10 @@ import { ReactiveFormsModule } from '@angular/forms';
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
-            { path: 'car', component: CarListComponent },
+
+            { path: 'cars', component: CarListComponent },
             { path: 'editcar/:carID', component: CarNewItemComponent },
-            { path: 'car/:customerID', component: CarListItemComponent },
+            { path: 'viewcar/:customerID', component: CarListItemComponent },
             { path: 'newcar/:customerID', component: CarNewItemComponent },
 
             { path: 'customers', component: CustomerListComponent },

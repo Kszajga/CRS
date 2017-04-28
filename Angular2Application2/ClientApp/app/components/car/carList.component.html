@@ -2,8 +2,11 @@
     <div class="col-md-12">
         <form [formGroup]="searchForm" class="form-inline" novalidate>
             <input #lastName type="text" formControlName="lastName" placeholder="Ügyfél vezetékneve" class="form-control" />
+
             <input #firstName type="text" formControlName="firstName" placeholder="Ügyfél keresztneve" class="form-control" />
+
             <input #licensePlate type="text" formControlName="licensePlate" placeholder="Rendszám" class="form-control" />
+
             <select #carmakeselected formControlName="carMakeID" (change)="SelectedCarMake(carmakeselected.value)" class="form-control">
                 <option disabled hidden [value]="undefined">Jármű márka</option>
                 <option *ngFor="let carMake of carMakes" [value]="carMake.carMakeID">{{carMake.carMakeName}}</option>
@@ -18,6 +21,7 @@
         </form>
     </div>
 </div>
+
 <p *ngIf="!cars && submitted"><em>Loading...</em></p>
 
 <table class="table table-bordered margin-top-10" *ngIf="cars">
@@ -26,24 +30,13 @@
             <th>Ügyfél neve</th>
             <th>Jármű márka, típus</th>
             <th>Rendszám</th>
-            <!--<th>ServiceIncidences</th>-->
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let car of cars" (click)="ViewCar(car.carID)">
-            <td>{{ car.customer.lastName }} {{ car.customer.firstName}}</td>
-            <td>{{ car.carModel.carMake.carMakeName }} {{ car.carModel.carModelName }}</td>
-            <td>{{ car.licensePlate}}</td>
-            <!--<td>
-                <ul>
-                    <li *ngFor="let si of car.serviceIncidences">
-                        {{ si.serviceIncidenceName.incidenceName }} {{ si.repairDate | date:'yyyy. MM. dd.'}}
-                        <ul>
-                            <li *ngFor="let carpart of si.serviceIncidenceCarPart">{{carpart.carPart.carPartName}} {{carpart.carPart.price}}</li>
-                        </ul>
-                    </li>
-                </ul>
-            </td>-->
+        <tr *ngFor="let car of cars">
+            <td (click)="ViewCustomer(car.customer.customerID)">{{ car.customer.lastName }} {{ car.customer.firstName}}</td>
+            <td (click)="ViewCar(car.carID)">{{ car.carModel.carMake.carMakeName }} {{ car.carModel.carModelName }}</td>
+            <td (click)="ViewCar(car.carID)">{{ car.licensePlate}}</td>
         </tr>
     </tbody>
 </table>

@@ -68,25 +68,20 @@ namespace CRS.Controllers
                         select car);
             
             if (firstName != null)
-            {
                 query = query.Where(car => car.Customer.FirstName.Contains(firstName));
-            }
+            
             if (lastName != null)
-            {
                 query = query.Where(car => car.Customer.LastName.Contains(lastName));
-            }
+            
             if (licensePlate != null)
-            {
                 query = query.Where(car => car.LicensePlate.Contains(licensePlate));
-            }
+            
             if (carmakeselected > 0)
-            {
                 query = query.Where(car => car.CarModel.CarMakeID.Equals(carmakeselected));
-            }
+            
             if (carmodelselected > 0)
-            {
                 query = query.Where(car => car.CarModelID.Equals(carmodelselected));
-            }
+            
             await query.ToListAsync();
             return Ok(query);
         }

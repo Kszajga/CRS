@@ -66,13 +66,12 @@ export class CarListComponent implements OnInit {
 
     private StartSearch(firstName, lastName, licensePlate, carmakeselected, carmodelselected) {
         this.submitted = true;
-        console.log(lastName, firstName, licensePlate, carmakeselected, carmodelselected);
+        //console.log(lastName, firstName, licensePlate, carmakeselected, carmodelselected);
         this.carService.getCarsForSearch(lastName, firstName, licensePlate, carmakeselected, carmodelselected);
         this.submitted = false;
     }
 
     SelectedCarMake(carmakeid: number) {
-        //this.carModels = null;
         console.log(carmakeid);
         this.carService.getCarModelByCarMakeID(carmakeid);
         this.carModelsSubs = this.carService.carModels.subscribe(this.carmodelData);
@@ -84,5 +83,9 @@ export class CarListComponent implements OnInit {
 
     ViewCar(carID: number) {
         this.router.navigate(["/editcar/" + carID]);
+    }
+
+    ViewCustomer(customerID: number) {
+        this.router.navigate(["/viewcustomer/" + customerID]);
     }
 }

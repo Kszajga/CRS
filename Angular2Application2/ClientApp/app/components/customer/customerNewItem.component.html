@@ -1,7 +1,7 @@
 ﻿<toaster-container></toaster-container>
 <form [formGroup]="customerForm" class="well form-horizontal" novalidate>
     
-    <div class="form-group" [ngClass]="{'has-error':!customerForm.controls['lastName'].valid}">
+    <div class="form-group" [ngClass]="{'has-error':!customerForm.controls['lastName'].valid && !customerForm.controls['lastName'].pristine}">
         <label class="col-md-4 control-label">Vezetéknév*</label>
         <div class="col-md-4 inputGroupContainer">
             <div class="input-group">
@@ -11,7 +11,7 @@
         </div>
     </div>
 
-    <div class="form-group" [ngClass]="{'has-error':!customerForm.controls['firstName'].valid}">
+    <div class="form-group" [ngClass]="{'has-error':!customerForm.controls['firstName'].valid && !customerForm.controls['firstName'].pristine}">
         <label class="col-md-4 control-label">Keresztnév*</label>
         <div class="col-md-4 inputGroupContainer">
             <div class="input-group">
@@ -21,12 +21,12 @@
         </div>
     </div>
 
-    <div class="form-group" [ngClass]="{'has-error':!customerForm.controls['phoneNumber'].valid}">
+    <div class="form-group" [ngClass]="{'has-error':!customerForm.controls['phoneNumber'].valid && !customerForm.controls['phoneNumber'].pristine}">
         <label class="col-md-4 control-label">Telefonszám*</label>
         <div class="col-md-4 inputGroupContainer">
             <div class="input-group">
                 <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
-                <input name="PhoneNumber" id="Firstname" placeholder="Telefonszám" formControlName="phoneNumber" class="form-control" type="text">
+                <input name="PhoneNumber" id="PhoneNumber" placeholder="Telefonszám" formControlName="phoneNumber" class="form-control" type="text" OnlyNumber="true">
             </div>
         </div>
     </div>
@@ -147,12 +147,12 @@
     <button type="submit" class="btn btn-primary" (click)="saveCustomer()"
             [disabled]="!customerForm.valid">
         <!---->
-        Save
+        Mentés
         <span class="glyphicon glyphicon-refresh glyphicon-spin"></span>
     </button>
-    <button type="button" class="btn btn-warning" (click)="cancel()">Cancel</button>
-    <button type="button" class="btn btn-danger" (click)="onDelete()">Delete</button>
-    <button type="button" class="btn btn-default" (click)="back()">Back</button>
+    <!--<button type="button" class="btn btn-warning" (click)="cancel()">Cancel</button>-->
+    <button [hidden]="!customerID" type="button" class="btn btn-danger" (click)="deleteCustomer()">Törlés</button>
+    <button type="button" class="btn btn-default" (click)="back()">Vissza</button>
 
     <!--<div *ngIf="!carForm.valid" class="alert alert-danger">Correct all invalid values to enable save.</div>-->
 

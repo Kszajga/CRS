@@ -99,6 +99,12 @@ export class CustomerNewItemComponent implements OnInit, OnDestroy {
         //this.customerForm.reset();
     }
 
+    deleteCustomer() {
+        if (confirm("Valóban törölni szeretné az ügyfelet?")) {
+            //törlés implementáció
+        }
+    }
+
     back() {
         console.log("dirty? " + this.customerForm.dirty);
         if (this.customerForm.dirty) {
