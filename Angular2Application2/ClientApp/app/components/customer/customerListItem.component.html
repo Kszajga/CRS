@@ -30,7 +30,7 @@
                     </tbody>
                 </table>
             </div>
-            <div class="panel-footer">Panel Footer</div>
+            <!--<div class="panel-footer">Panel Footer</div>-->
         </div>
     </div>
 </div>
@@ -69,8 +69,35 @@
                                 <div id="car{{car.carID}}" class="panel-collapse collapse" aria-expanded="true">
                                     <div class="panel-body">
 
-
-                                        {{car.carModel.carMake.carMakeName}} {{car.carModel.carModelName}}
+                                        <table class="table table-responsive table-hover">
+                                            <tbody>
+                                                <tr>
+                                                    <td>Márka, típus</td>
+                                                    <td>{{car.carModel.carMake.carMakeName}} {{car.carModel.carModelName}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Első forgalombahelyezés</td>
+                                                    <td>{{car.firstRegistrationDate | date:'yyyy. MM. dd.'}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Műszaki vizsga érvényessége</td>
+                                                    <td>{{car.technicalExamDate | date:'yyyy. MM. dd.'}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Rendszám</td>
+                                                    <td>{{car.licensePlate}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Alvázszám</td>
+                                                    <td>{{car.vin}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Motorszám</td>
+                                                    <td>{{car.engineNumber}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        
 
                                     </div>
                                     <!--<div class="panel-footer">Panel Footer</div>-->

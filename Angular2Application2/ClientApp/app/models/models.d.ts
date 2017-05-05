@@ -10,6 +10,9 @@
         fuelTypeID: number;
         vin: string;
         licensePlate: string;
+        productionDate: Date;
+        firstRegistrationDate: Date;
+        technicalExamDate: Date;
     }
 
     interface ICarMake {

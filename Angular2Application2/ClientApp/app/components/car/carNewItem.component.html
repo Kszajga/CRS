@@ -1,107 +1,83 @@
 ﻿<h3>Jármű adatai</h3>
 <form [formGroup]="carForm" class="well form-horizontal" novalidate>
-    <div class="form-group" [ngClass]="{'has-error':!carForm.controls['carMakeID'].valid}">
+    <div *ngIf="!carForm.valid" class="alert alert-danger">Csillaggal (*) jelölt mezők kitöltése kötelező!</div>
+    <div class="form-group" [ngClass]="{'has-error':!carForm.controls['carMakeID'].valid && !carForm.controls['carMakeID'].pristine}">
         <label class="col-md-4 control-label">Jármű márka*</label>
         <div class="col-md-4">
-            <div class="form-group">
-                <select #carmakeselected formControlName="carMakeID" (change)="SelectedCarMake(carmakeselected.value)" class="form-control">
-                    <option *ngFor="let carMake of carMakes" [value]="carMake.carMakeID">{{carMake.carMakeName}}</option>
-                </select>
-            </div>
+            <select #carmakeselected formControlName="carMakeID" (change)="SelectedCarMake(carmakeselected.value)" class="form-control">
+                <option *ngFor="let carMake of carMakes" [value]="carMake.carMakeID">{{carMake.carMakeName}}</option>
+            </select>
         </div>
     </div>
 
-    <div class="form-group" [ngClass]="{'has-error':!carForm.controls['carModelID'].valid}">
+    <div class="form-group" [ngClass]="{'has-error':!carForm.controls['carModelID'].valid && !carForm.controls['carModelID'].pristine}">
         <label class="col-md-4 control-label">Jármű típus*</label>
         <div class="col-md-4">
-            <div class="form-group">
-                <select #carmodelselected formControlName="carModelID" (change)="SelectedCarModel(carmodelselected.value)" class="form-control">
-                    <option *ngFor="let carModel of carModels" [value]="carModel.carModelID">{{carModel.carModelName}}</option>
-                </select>
-            </div>
+            <select #carmodelselected formControlName="carModelID" (change)="SelectedCarModel(carmodelselected.value)" class="form-control">
+                <option *ngFor="let carModel of carModels" [value]="carModel.carModelID">{{carModel.carModelName}}</option>
+            </select>
         </div>
     </div>
 
-    <div class="form-group"> <!--[ngClass]="{'has-error':!carForm.controls['carModelID'].valid}"-->
+    <div class="form-group">
+        <!--[ngClass]="{'has-error':!carForm.controls['carModelID'].valid}"-->
         <label class="col-md-4 control-label">Üzemanyag típus</label>
         <div class="col-md-4">
-            <div class="form-group">
-                <select #fueltypeselected formControlName="fuelTypeID" (change)="SelectedFuelType(fueltypeselected.value)" class="form-control">
-                    <option *ngFor="let fuelType of fuelTypes" [value]="fuelType.fuelTypeID">{{fuelType.fuelTypeName}}</option>
-                </select>
-            </div>
+            <select #fueltypeselected formControlName="fuelTypeID" (change)="SelectedFuelType(fueltypeselected.value)" class="form-control">
+                <option *ngFor="let fuelType of fuelTypes" [value]="fuelType.fuelTypeID">{{fuelType.fuelTypeName}}</option>
+            </select>
         </div>
     </div>
 
-    <div class="row">
-        <!--<div class="col-xs-12 col-sm-4 col-lg-4">
-            <div class="form-group">
-                <label for="carMakeID">Jármű márka</label>
-                <select #carmakeselected formControlName="carMakeID" (change)="SelectedCarMake(carmakeselected.value)" class="form-control">
-                    <option *ngFor="let carMake of carMakes" [value]="carMake.carMakeID">{{carMake.carMakeName}} {{carMake.carMakeID}}</option>
-                </select>
-            </div>
-        </div>-->
-
-        <!--<div class="col-xs-12 col-sm-4 col-lg-4">
-            <div class="form-group">
-                <label for="carModelID">Jármű típus</label>
-                <select #carmodelselected formControlName="carModelID" (change)="SelectedCarModel(carmodelselected.value)" class="form-control">
-                    <option *ngFor="let carModel of carModels" [value]="carModel.carModelID">{{carModel.carModelName}} {{carModel.carModelID}}</option>
-                </select>
-            </div>
-        </div>-->
-
-        <!--<div class="col-xs-12 col-sm-4 col-lg-4">
-            <div class="form-group">
-                <label for="fuelTypeID">Üzemanyag típus</label>
-                <select #fueltypeselected formControlName="fuelTypeID" (change)="SelectedFuelType(fueltypeselected.value)" class="form-control">
-                    <option *ngFor="let fuelType of fuelTypes" [value]="fuelType.fuelTypeID">{{fuelType.fuelTypeName}}</option>
-                </select>
-            </div>
-        </div>-->
-    </div>
-    
-    <div class="row">
-        <div class="col-xs-12 col-sm-4 col-lg-4">
-            <div class="form-group">
-                <label for="vin">Alvázszám</label>
-                <input class="form-control" type="text" id="vin" formControlName="vin" />
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-4 col-lg-4">
-            <div class="form-group">
-                <label for="engineNumber">Motorszám</label>
-                <input class="form-control" type="text" id="engineNumber" formControlName="engineNumber" />
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-4 col-lg-4">
-            <div class="form-group">
-                <label for="color">Szín</label>
-                <input class="form-control" type="text" id="color" formControlName="color" />
-            </div>
+    <div class="form-group">
+        <label class="col-md-4 control-label">Első forgalombahelyezés</label>
+        <div class="col-md-4">
+            <input class="form-control" type="date" id="firstRegistrationDate" formControlName="firstRegistrationDate" />
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-xs-12 col-sm-4 col-lg-4">
-            <div class="form-group">
-                <label for="licenseplate">Rendszám</label>
-                <input class="form-control" id="licenseplate" formControlName="licensePlate">
-            </div>
+    <div class="form-group">
+        <label class="col-md-4 control-label">Műszaki vizsga érvényessége</label>
+        <div class="col-md-4">
+            <input class="form-control" type="date" id="technicalExamDate" formControlName="technicalExamDate" />
         </div>
     </div>
 
+    <div class="form-group">
+        <label class="col-md-4 control-label">Gyártási év</label>
+        <div class="col-md-4">
+            <input class="form-control" type="date" id="productionDate" formControlName="productionDate" />
+        </div>
+    </div>
 
-            <button type="submit" class="btn btn-primary" (click)="saveCar()"
-                    [disabled]="!carForm.valid">
-                <!---->
-                Mentés
-                <span class="glyphicon glyphicon-refresh glyphicon-spin"></span>
-            </button>
-            <button type="button" class="btn btn-danger" (click)="onDelete()">Törlés</button>
-            <button type="button" class="btn btn-warning" (click)="back()">Vissza</button>
+    <div class="form-group">
+        <label class="col-md-4 control-label">Alvázszám</label>
+        <div class="col-md-4">
+            <input class="form-control" type="text" id="vin" formControlName="vin" />
+        </div>
+    </div>
 
-            <!--<div *ngIf="!carForm.valid" class="alert alert-danger">Correct all invalid values to enable save.</div>-->
+    <div class="form-group">
+        <label class="col-md-4 control-label">Motorszám</label>
+        <div class="col-md-4">
+            <input class="form-control" type="text" id="engineNumber" formControlName="engineNumber" />
+        </div>
+    </div>
 
+    <div class="form-group">
+        <label class="col-md-4 control-label">Szín</label>
+        <div class="col-md-4">
+            <input class="form-control" type="text" id="color" formControlName="color" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-md-4 control-label">Rendszám</label>
+        <div class="col-md-4">
+            <input class="form-control" id="licenseplate" formControlName="licensePlate">
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary" (click)="saveCar()" [disabled]="!carForm.valid">Mentés<span class="glyphicon glyphicon-refresh glyphicon-spin"></span></button>
+    <button [hidden]="!carID" type="button" class="btn btn-danger" (click)="deleteCar()">Törlés</button>
+    <button type="button" class="btn btn-warning" (click)="back()">Vissza</button>
 </form>

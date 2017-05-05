@@ -34,8 +34,79 @@ namespace CRS.Data
             
             var carmakes = new CarMake[]
             {
+                new CarMake {CarMakeName = "Acura" },
+                new CarMake {CarMakeName = "Alfa Romeo" },
+                new CarMake {CarMakeName = "AMC" },
+                new CarMake {CarMakeName = "Aston Martin" },
+                new CarMake {CarMakeName = "Audi" },
+                new CarMake {CarMakeName = "Avanti" },
+                new CarMake {CarMakeName = "Bentley" },
+                new CarMake {CarMakeName = "BMW" },
+                new CarMake {CarMakeName = "Buick" },
+                new CarMake {CarMakeName = "Cadillac" },
+                new CarMake {CarMakeName = "Chevrolet" },
+                new CarMake {CarMakeName = "Chrysler" },
+                new CarMake {CarMakeName = "Daewoo" },
+                new CarMake {CarMakeName = "Daihatsu" },
+                new CarMake {CarMakeName = "Datsun" },
+                new CarMake {CarMakeName = "DeLorean" },
+                new CarMake {CarMakeName = "Dodge" },
+                new CarMake {CarMakeName = "Eagle" },
+                new CarMake {CarMakeName = "Ferrari" },
+                new CarMake {CarMakeName = "Fiat" },
+                new CarMake {CarMakeName = "Fisker" },
+                new CarMake {CarMakeName = "Ford" },
+                new CarMake {CarMakeName = "Freightliner" },
+                new CarMake {CarMakeName = "Geo" },
+                new CarMake {CarMakeName = "GMC" },
+                new CarMake {CarMakeName = "Honda" },
+                new CarMake {CarMakeName = "Hummer" },
+                new CarMake {CarMakeName = "Hyundai" },
+                new CarMake {CarMakeName = "Infiniti" },
+                new CarMake {CarMakeName = "Isuzu" },
+                new CarMake {CarMakeName = "Jaguar" },
+                new CarMake {CarMakeName = "Jeep" },
+                new CarMake {CarMakeName = "Kia" },
+                new CarMake {CarMakeName = "Lamborghini" },
+                new CarMake {CarMakeName = "Lancia" },
+                new CarMake {CarMakeName = "Land Rover" },
+                new CarMake {CarMakeName = "Lexus" },
+                new CarMake {CarMakeName = "Lincoln" },
+                new CarMake {CarMakeName = "Lotus" },
+                new CarMake {CarMakeName = "Maserati" },
+                new CarMake {CarMakeName = "Maybach" },
+                new CarMake {CarMakeName = "Mazda" },
+                new CarMake {CarMakeName = "McLaren" },
+                new CarMake {CarMakeName = "Mercedes-Benz" },
+                new CarMake {CarMakeName = "Mercury" },
+                new CarMake {CarMakeName = "Merkur" },
+                new CarMake {CarMakeName = "Mini" },
+                new CarMake {CarMakeName = "Mitsubishi" },
+                new CarMake {CarMakeName = "Nissan" },
+                new CarMake {CarMakeName = "Oldsmobile" },
+                new CarMake {CarMakeName = "Peugeot" },
+                new CarMake {CarMakeName = "Plymouth" },
+                new CarMake {CarMakeName = "Pontiac" },
+                new CarMake {CarMakeName = "Porsche" },
+                new CarMake {CarMakeName = "RAM" },
+                new CarMake {CarMakeName = "Renault" },
+                new CarMake {CarMakeName = "Rolls-Royce" },
+                new CarMake {CarMakeName = "Saab" },
+                new CarMake {CarMakeName = "Saturn" },
+                new CarMake {CarMakeName = "Scion" },
+                new CarMake {CarMakeName = "Smart" },
+                new CarMake {CarMakeName = "SRT" },
+                new CarMake {CarMakeName = "Sterling" },
+                new CarMake {CarMakeName = "Subaru" },
                 new CarMake {CarMakeName = "Suzuki" },
-                new CarMake {CarMakeName = "Mazda" }
+                new CarMake {CarMakeName = "Tesla" },
+                new CarMake {CarMakeName = "Toyota" },
+                new CarMake {CarMakeName = "Triumph" },
+                new CarMake {CarMakeName = "Volkswagen" },
+                new CarMake {CarMakeName = "Volvo" },
+                new CarMake {CarMakeName = "Yugo" },
+                new CarMake {CarMakeName = "Egyéb" },
+
             };
 
             foreach (CarMake c in carmakes)
@@ -46,8 +117,8 @@ namespace CRS.Data
 
             var carmodels = new CarModel[]
             {
-                new CarModel {CarModelName = "Swift", CarMakeID = 1 },
-                new CarModel {CarModelName = "6", CarMakeID = 2 }
+                new CarModel {CarModelName = "Swift", CarMakeID = 65 },
+                new CarModel {CarModelName = "6", CarMakeID = 42 }
             };
 
             foreach (CarModel c in carmodels)

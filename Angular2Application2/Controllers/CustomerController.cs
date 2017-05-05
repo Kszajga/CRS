@@ -28,13 +28,10 @@ namespace CRS.Controllers
             var data = await _context.Customer
                 .Where(c => c.CustomerID == customerID)
                 .Include(car => car.Cars)
-                    .ThenInclude(car => car.FuelType)
+                    .ThenInclude(fuel => fuel.FuelType)
                 .Include(car => car.Cars)
-                    .ThenInclude(car2 => car2.CarModel)
-                        .ThenInclude(car3 => car3.CarMake)
-                .Include(car => car.Cars)
-                    .ThenInclude(car4 => car4.ServiceIncidences)
-                        .ThenInclude(s => s.ServiceIncidenceName)
+                    .ThenInclude(model => model.CarModel)
+                        .ThenInclude(make => make.CarMake)
                 .ToListAsync();
             return Ok(data);
         }

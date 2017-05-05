@@ -36,13 +36,7 @@ export class CarNewItemComponent implements OnInit, OnDestroy {
         private carService: CarService,
         private route: ActivatedRoute,
         private formBuilder: FormBuilder
-    ){
-        //nah idáig nem jön el ez a lófasz
-        //console.log(this.car[0].carModel.carMake.carMakeID);
-        console.log("Constructor");
-        //this.carService.getCarModelByCarMakeID(this.car[0].carModel.carMake.carMakeID);
-        //this.carModelsSubs = this.carService.carModels.subscribe(this.carmodelData);
-    }
+    ){}
 
     private carmakeData = (data: ICarMake[]) => {
         this.carMakes = data;
@@ -59,6 +53,11 @@ export class CarNewItemComponent implements OnInit, OnDestroy {
     private carData = (data: ICar) => {
         this.car = data;
         //console.log("car carData loaded " + this.car[0].carModel.carMake.carMakeID);
+
+        // Dátum átalakítása, hogy az inputban megjelenhessen
+        if (this.car[0].firstRegistrationDate) {
+            this.car[0].firstRegistrationDate = new Date(this.car[0].firstRegistrationDate).toISOString().substring(0, 10);
+        }
 
         //Ha az autó adatai betöltődtek, form feltöltése
         if (this.car) {
@@ -132,6 +131,9 @@ export class CarNewItemComponent implements OnInit, OnDestroy {
             "carID": [0],
             "carMakeID": [null, Validators.compose([Validators.required])],
             "carModelID": [null, Validators.compose([Validators.required])],
+            "productionDate": [null],
+            "firstRegistrationDate": [null, Validators.compose([Validators.required])],
+            "technicalExamDate": [null],
             "fuelTypeID": [null],
             "vin": [null],
             "engineNumber": [null],
@@ -189,6 +191,8 @@ export class CarNewItemComponent implements OnInit, OnDestroy {
         }
         //this.router.navigate(["/viewcustomer/" + this.car.customerID]);
     }
+
+    deleteCar(carID:number){}
 
     back() {
         if (this.customerID) {

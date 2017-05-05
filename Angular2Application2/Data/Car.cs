@@ -18,6 +18,9 @@ namespace CRS.Data
         public string EngineNumber { get; set; }
         public string Color { get; set; }
         public string LicensePlate { get; set; }
+        public DateTime? ProductionDate { get; set; }
+        public DateTime? FirstRegistrationDate { get; set; }
+        public DateTime? TechnicalExamDate { get; set; }
 
         public int CustomerID { get; set; }
         public Customer Customer { get; set; }

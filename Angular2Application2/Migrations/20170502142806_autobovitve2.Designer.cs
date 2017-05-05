@@ -8,9 +8,10 @@ using CRS.Data;
 namespace CRS.Migrations
 {
     [DbContext(typeof(CRSContext))]
-    partial class CRSContextModelSnapshot : ModelSnapshot
+    [Migration("20170502142806_autobovitve2")]
+    partial class autobovitve2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.0-rtm-22752")

@@ -8,9 +8,10 @@ using CRS.Data;
 namespace CRS.Migrations
 {
     [DbContext(typeof(CRSContext))]
-    partial class CRSContextModelSnapshot : ModelSnapshot
+    [Migration("20170502141354_autobovitve")]
+    partial class autobovitve
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.0-rtm-22752")
@@ -41,8 +42,6 @@ namespace CRS.Migrations
                     b.Property<string>("LicensePlate");
 
                     b.Property<DateTime?>("ProductionDate");
-
-                    b.Property<DateTime?>("TechnicalExamDate");
 
                     b.Property<string>("VIN")
                         .IsRequired();
