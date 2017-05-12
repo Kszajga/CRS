@@ -22,6 +22,8 @@ namespace CRS.Data
         public DateTime? FirstRegistrationDate { get; set; }
         public DateTime? TechnicalExamDate { get; set; }
 
+        public bool Deleted { get; set; }
+
         public int CustomerID { get; set; }
         public Customer Customer { get; set; }
 

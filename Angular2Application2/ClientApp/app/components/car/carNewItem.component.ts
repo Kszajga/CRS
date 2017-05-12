@@ -58,6 +58,12 @@ export class CarNewItemComponent implements OnInit, OnDestroy {
         if (this.car[0].firstRegistrationDate) {
             this.car[0].firstRegistrationDate = new Date(this.car[0].firstRegistrationDate).toISOString().substring(0, 10);
         }
+        if (this.car[0].technicalExamDate) {
+            this.car[0].technicalExamDate = new Date(this.car[0].technicalExamDate).toISOString().substring(0, 10);
+        }
+        if (this.car[0].productionDate) {
+            this.car[0].productionDate = new Date(this.car[0].productionDate).toISOString().substring(0, 10);
+        }
 
         //Ha az autó adatai betöltődtek, form feltöltése
         if (this.car) {
@@ -94,12 +100,8 @@ export class CarNewItemComponent implements OnInit, OnDestroy {
             this.carService.getAllCarMakes();
             this.carService.getFuelTypes();
 
-
             this.carService.getCarByCarID(this.carID);
-            this.carSubs = this.carService.car.subscribe(this.carData);
-
-            
-            
+            this.carSubs = this.carService.car.subscribe(this.carData);            
         }
         console.log("carID: " + this.carID);        
         this.carMakesSubs = this.carService.carMakes.subscribe(this.carmakeData);
@@ -135,7 +137,7 @@ export class CarNewItemComponent implements OnInit, OnDestroy {
             "firstRegistrationDate": [null, Validators.compose([Validators.required])],
             "technicalExamDate": [null],
             "fuelTypeID": [null],
-            "vin": [null],
+            "vin": [null, Validators.compose([Validators.required])],
             "engineNumber": [null],
             "color": [null],
             "customerID": [this.customerID],
@@ -192,7 +194,11 @@ export class CarNewItemComponent implements OnInit, OnDestroy {
         //this.router.navigate(["/viewcustomer/" + this.car.customerID]);
     }
 
-    deleteCar(carID:number){}
+    deleteCar(carID: number) {
+        if (confirm("Valóban törölni szeretné a járművet?")) {
+            //törlés implementáció
+        }
+    }
 
     back() {
         if (this.customerID) {
